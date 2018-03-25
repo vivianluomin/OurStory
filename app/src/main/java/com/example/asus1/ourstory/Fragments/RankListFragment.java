@@ -10,15 +10,15 @@ import android.view.ViewGroup;
 import com.example.asus1.ourstory.R;
 
 /**
- * Created by asus1 on 2018/3/24.
+ * Created by asus1 on 2018/3/25.
  */
 
-public class JoinFragment extends Fragment {
+public class RankListFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_join,container,false);
+        View view = inflater.inflate(R.layout.fragment_ranklist,container,false);
 
         return view;
     }

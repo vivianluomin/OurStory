@@ -6,4 +6,7 @@
     <string name="collection">我的收藏</string>
     <string name="mypublish">我的发起</string>
     <string name="myjoin">我的参与</string>
+    <string name="Todayintroduction">今日推介</string>
+    <string name="ranklist">排行榜</string>
+    <string name="allWorks">全部作品</string>
 </resources>

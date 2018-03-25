@@ -11,7 +11,9 @@ import android.widget.FrameLayout;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.example.asus1.ourstory.BaseActivity;
+import com.example.asus1.ourstory.Fragments.AccountFragment;
 import com.example.asus1.ourstory.Fragments.BookShelfFragment;
+import com.example.asus1.ourstory.Fragments.FindFragment;
 import com.example.asus1.ourstory.R;
 
 public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener {
@@ -73,15 +75,15 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 break;
             case 1:
                 if(mNow!=1){
-//                    mFragmentTransaction.replace(R.id.frame_container,new BookShelfFragment());
-//                    mFragmentTransaction.commit();
+                    mFragmentTransaction.replace(R.id.frame_container,new FindFragment());
+                    mFragmentTransaction.commit();
                     mNow = 1;
                 }
                 break;
             case 2:
                 if(mNow!=2){
-//                    mFragmentTransaction.replace(R.id.frame_container,new BookShelfFragment());
-//                    mFragmentTransaction.commit();
+                    mFragmentTransaction.replace(R.id.frame_container,new AccountFragment());
+                    mFragmentTransaction.commit();
                     mNow = 2;
                 }
                 break;
