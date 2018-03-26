@@ -7,6 +7,9 @@
 
     >
 
-    <include layout="@layout/layout_tab_viewpager"/>
+    <include layout="@layout/layout_tab_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
 
 </FrameLayout>

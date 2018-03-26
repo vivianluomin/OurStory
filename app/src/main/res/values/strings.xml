@@ -9,4 +9,6 @@
     <string name="Todayintroduction">今日推介</string>
     <string name="ranklist">排行榜</string>
     <string name="allWorks">全部作品</string>
+    <string name="start_publish">我要发起</string>
+    <string name="start_work">我要续写</string>
 </resources>

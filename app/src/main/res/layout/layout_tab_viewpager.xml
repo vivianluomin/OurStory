@@ -7,6 +7,11 @@
     android:orientation="vertical"
     >
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/main_bule"
+        >
     <android.support.design.widget.TabLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -18,10 +23,24 @@
         app:tabTextColor="@color/gray"
         app:tabBackground="@color/main_bule"
         android:background="@color/main_bule"
-        app:tabMode="scrollable"
         >
     </android.support.design.widget.TabLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/start_publish"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:layout_gravity="bottom|end"
+            android:background="@drawable/bg_text"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
+            android:padding="5dp"
+            android:id="@+id/tv_start_publish"
+            />
+
+</FrameLayout>
     <android.support.v4.view.ViewPager
         android:layout_width="match_parent"
         android:layout_height="0dp"
