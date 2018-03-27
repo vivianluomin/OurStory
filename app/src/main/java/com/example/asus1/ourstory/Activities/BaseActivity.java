@@ -1,4 +1,4 @@
-package com.example.asus1.ourstory;
+package com.example.asus1.ourstory.Activities;
 
 import android.graphics.Color;
 import android.os.Build;

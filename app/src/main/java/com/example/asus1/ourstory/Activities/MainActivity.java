@@ -1,16 +1,11 @@
 package com.example.asus1.ourstory.Activities;
 
-import android.content.Context;
-import android.graphics.Color;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.FrameLayout;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
-import com.example.asus1.ourstory.BaseActivity;
 import com.example.asus1.ourstory.Fragments.AccountFragment;
 import com.example.asus1.ourstory.Fragments.BookShelfFragment;
 import com.example.asus1.ourstory.Fragments.FindFragment;

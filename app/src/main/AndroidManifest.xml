@@ -18,7 +18,7 @@
         </activity>
         <activity android:name=".Activities.ReadStoryActivity" />
         <activity android:name=".Activities.BaseActivity" />
-        <activity android:name=".BaseActivity" />
+        <activity android:name=".Activities.BaseActivity" />
         <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

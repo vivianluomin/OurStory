@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:id="@+id/cardview_item_one"
+    android:layout_marginBottom="10dp"
+    >
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:id="@+id/iv_book_bg"
+        android:src="@color/bg_gray"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="68dp"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_bookname"
+            android:textSize="14sp"
+            android:textColor="@color/Text_color"
+            android:text="XXXXX"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_book_brief"
+            android:textSize="12sp"
+            android:textColor="@color/second_text_color"
+            android:layout_marginTop="4dp"
+            android:maxLines="2"
+            android:text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx...."
+
+            />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="26dp"
+        android:layout_marginLeft="68dp"
+        android:layout_gravity="bottom"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableLeft="@mipmap/ic_author1"
+            android:id="@+id/tv_book_author"
+            android:layout_alignParentBottom="true"
+            android:textSize="12sp"
+            android:textColor="@color/second_text_color"
+            android:text="xxx"
+            android:gravity="center_vertical"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_type"
+            android:textSize="10sp"
+            android:padding="2dp"
+            android:textColor="@color/green_200"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/bg_lable"
+            android:text="双续写"
+            android:layout_alignParentBottom="true"
+            />
+
+
+    </RelativeLayout>
+
+</FrameLayout>

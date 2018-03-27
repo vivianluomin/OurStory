@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="30dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_updatenow"
+        android:textColor="@color/Text_color"
+        android:textSize="14sp"
+        android:text="已更新至：xxxxxx"
+        />
+
+       <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_word_count"
+        android:textSize="12sp"
+        android:padding="2dp"
+        android:textColor="@color/green_200"
+        android:background="@drawable/bg_lable"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:text="字数：20万"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_join_number"
+        android:textSize="12sp"
+        android:padding="2dp"
+        android:textColor="@color/green_200"
+        android:background="@drawable/bg_lable"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="16dp"
+        android:layout_toLeftOf="@id/tv_word_count"
+        android:text="参与人数：33"
+        />
+
+
+</RelativeLayout>
