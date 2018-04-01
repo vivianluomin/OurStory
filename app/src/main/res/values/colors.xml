@@ -13,7 +13,9 @@
     <color name="green_line">#4CAF50</color>
     <color name="gray">#dbdbdb</color>
     <color name="orange">#FF9800</color>
-    <color name="bg_gray">#f2f2f2</color>
+    <color name="bg_gray">#eeeeee</color>
     <color name="select_color">#00897b</color>
     <color name="green_200">#80cbc4</color>
+    <color name="red_100">#f9bdbb</color>
+    <color name="red_200">#f69988</color>
 </resources>

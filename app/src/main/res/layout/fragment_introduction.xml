@@ -8,9 +8,15 @@
     >
 
 
-    <include layout="@layout/layout_book_fold"
-        android:id="@+id/book_fold"
-        />
+   <android.support.v7.widget.RecyclerView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/recycler_view"
+       android:layout_marginTop="4dp"
+       >
+
+
+   </android.support.v7.widget.RecyclerView>
 
 
 

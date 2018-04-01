@@ -4,9 +4,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:id="@+id/cardview_item_one"
-    android:layout_marginBottom="10dp"
+    android:id="@+id/book_fold_item_one"
+    android:background="@drawable/bg_corner_1"
+    android:padding="10dp"
     >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:textSize="10sp"
+        android:padding="2dp"
+        android:textColor="@color/green_200"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/bg_lable"
+        android:text="@string/details"
+
+        />
 
     <ImageView
         android:layout_width="60dp"

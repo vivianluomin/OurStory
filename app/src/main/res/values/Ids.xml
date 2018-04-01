@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="fold_layout" type="id" format="integer" />
+    <item name="unfold_layout" type="id" format="integer"/>
+</resources>
