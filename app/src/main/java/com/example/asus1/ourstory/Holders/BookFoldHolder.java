@@ -4,6 +4,8 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.asus1.ourstory.Activities.BookDetailActivity;
 import com.example.asus1.ourstory.R;
 
 /**
@@ -32,6 +35,7 @@ public class BookFoldHolder extends RecyclerView.ViewHolder  {
     private TextView mUpdataNow;
     private TextView mJoinNumber;
     private TextView mWordCount;
+    private TextView mShowDetail;
 
     private TextView mStart;
     private TextView mUpdate;
@@ -43,13 +47,15 @@ public class BookFoldHolder extends RecyclerView.ViewHolder  {
     private int mWidth;
     private int mHeight;
     private int mSpan = 10;
+    private Context mContext;
 
     private boolean mAnimStart = false;
 
     private int flag = 0;
 
-    public BookFoldHolder(View itemView) {
+    public BookFoldHolder(View itemView, Context context) {
         super(itemView);
+        mContext = context;
         init(itemView);
     }
 
@@ -68,6 +74,15 @@ public class BookFoldHolder extends RecyclerView.ViewHolder  {
         mUpdate = (TextView)view. findViewById(R.id.tv_update);
         mUpdate.setPivotX(0);
         mUpdate.setPivotY(0);
+
+        mShowDetail = (TextView) view.findViewById(R.id.tv_book_detail);
+
+        mShowDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mContext.startActivity(new Intent(mContext, BookDetailActivity.class));
+            }
+        });
 
         mView_one.setOnClickListener(new View.OnClickListener() {
             @Override

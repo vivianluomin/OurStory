@@ -35,7 +35,7 @@ import com.example.asus1.ourstory.Views.BookFoldView;
  * Created by asus1 on 2018/3/25.
  */
 
-public class IntroductionFragment extends Fragment {
+public class IntroductionFragment extends Fragment{
 
 
     private static final String TAG = "IntroductionFragment";
@@ -44,6 +44,7 @@ public class IntroductionFragment extends Fragment {
     private Context mContext;
     private RecyclerView mRecyclerView;
     private RecyclerBookFlodAdapter mAdapter;
+
 
     @Nullable
     @Override
@@ -61,5 +62,6 @@ public class IntroductionFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);
+
     }
 }

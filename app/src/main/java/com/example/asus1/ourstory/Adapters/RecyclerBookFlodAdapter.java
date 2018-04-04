@@ -13,7 +13,7 @@ import com.example.asus1.ourstory.R;
  * Created by asus1 on 2018/4/1.
  */
 
-public class RecyclerBookFlodAdapter extends RecyclerView.Adapter<BookFoldHolder> {
+public class RecyclerBookFlodAdapter extends RecyclerView.Adapter<BookFoldHolder>  {
 
     private Context mContext;
 
@@ -25,7 +25,7 @@ public class RecyclerBookFlodAdapter extends RecyclerView.Adapter<BookFoldHolder
     public BookFoldHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view=LayoutInflater.from(mContext).inflate(R.layout.layout_book_fold,parent,false);
-        return new BookFoldHolder(view);
+        return new BookFoldHolder(view,mContext);
     }
 
     @Override
@@ -38,4 +38,7 @@ public class RecyclerBookFlodAdapter extends RecyclerView.Adapter<BookFoldHolder
     public int getItemCount() {
         return 3;
     }
+
+
+
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/catalog"
+        android:textSize="12sp"
+        android:textColor="@color/Text_color"
+        android:gravity="center"
+        android:id="@+id/tv_book_lable"
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableRight="@mipmap/ic_more1"
+        android:id="@+id/tv_book_update_now"
+        android:textColor="@color/second_text_color"
+        android:textSize="12sp"
+        android:text="更新至100段 更新于2018-02-01"
+        android:gravity="end|center"
+        />
+
+</LinearLayout>
