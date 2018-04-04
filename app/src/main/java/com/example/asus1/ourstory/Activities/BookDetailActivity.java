@@ -4,11 +4,13 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
+import com.example.asus1.ourstory.Adapters.RecyclerBookDetailAdpter;
 import com.example.asus1.ourstory.Listeners.AppBarStateChangeListener;
 import com.example.asus1.ourstory.R;
 
@@ -21,6 +23,7 @@ public class BookDetailActivity extends BaseActivity {
     private CollapsingToolbarLayout mToolbar_layout;
     private AppBarLayout mAppLayout;
     private RecyclerView mRecyclerView;
+    private RecyclerBookDetailAdpter mAdapter;
 
 
     @Override
@@ -55,6 +58,9 @@ public class BookDetailActivity extends BaseActivity {
         });
 
         mRecyclerView = (RecyclerView)findViewById(R.id.recycler_view);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mAdapter = new RecyclerBookDetailAdpter(this);
+        mRecyclerView.setAdapter(mAdapter);
 
     }
 }
