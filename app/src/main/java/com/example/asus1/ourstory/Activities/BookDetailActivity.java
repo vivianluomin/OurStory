@@ -13,6 +13,7 @@ import android.view.View;
 import com.example.asus1.ourstory.Adapters.RecyclerBookDetailAdpter;
 import com.example.asus1.ourstory.Listeners.AppBarStateChangeListener;
 import com.example.asus1.ourstory.R;
+import com.example.asus1.ourstory.Views.BookDetailDecoration;
 
 public class BookDetailActivity extends BaseActivity {
 
@@ -60,6 +61,7 @@ public class BookDetailActivity extends BaseActivity {
         mRecyclerView = (RecyclerView)findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new RecyclerBookDetailAdpter(this);
+        mRecyclerView.addItemDecoration(new BookDetailDecoration(this));
         mRecyclerView.setAdapter(mAdapter);
 
     }

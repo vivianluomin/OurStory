@@ -29,7 +29,7 @@ import com.example.asus1.ourstory.Adapters.RecyclerBookFlodAdapter;
 import com.example.asus1.ourstory.Adapters.RecyclerBookItemAdapter;
 import com.example.asus1.ourstory.Holders.BookFoldHolder;
 import com.example.asus1.ourstory.R;
-import com.example.asus1.ourstory.Views.BookFoldView;
+
 
 /**
  * Created by asus1 on 2018/3/25.
