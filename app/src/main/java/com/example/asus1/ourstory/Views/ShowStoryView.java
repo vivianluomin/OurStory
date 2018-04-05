@@ -71,6 +71,7 @@ public class ShowStoryView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+
         return super.onTouchEvent(event);
     }
 }
