@@ -1,11 +1,13 @@
 package com.example.asus1.ourstory.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.asus1.ourstory.Activities.ReadActivity;
 import com.example.asus1.ourstory.Holders.BaseHolder;
 import com.example.asus1.ourstory.Holders.BookItemHolder;
 import com.example.asus1.ourstory.R;
@@ -26,6 +28,12 @@ public class RecyclerBookItemAdapter extends RecyclerView.Adapter<BaseHolder> {
     @Override
     public BaseHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.layout_book_item,parent,false);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mContext.startActivity(new Intent(mContext, ReadActivity.class));
+            }
+        });
         return new BookItemHolder(view);
     }
 
