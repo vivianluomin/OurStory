@@ -8,7 +8,7 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.Point;
+
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Region;
@@ -25,11 +25,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Scroller;
 import android.widget.TextView;
 
+import com.example.asus1.ourstory.Model.FPoint;
 import com.example.asus1.ourstory.R;
 
 import java.security.cert.PolicyNode;
+import java.util.LinkedList;
 
 /**
  * Created by asus1 on 2018/3/25.
@@ -48,17 +51,17 @@ public class ShowStoryView extends View{
 
     private Paint mTextPaint;
 
-    private Point A;
-    private Point F;
-    private Point C;
-    private Point E;
-    private Point B;
-    private Point K;
-    private Point J;
-    private Point H;
-    private Point G;
-    private Point D;
-    private Point I;
+    private FPoint A;
+    private FPoint F;
+    private FPoint C;
+    private FPoint E;
+    private FPoint B;
+    private FPoint K;
+    private FPoint J;
+    private FPoint H;
+    private FPoint G;
+    private FPoint D;
+    private FPoint I;
     private BitmapFactory.Options options;
     private  Bitmap mUpPager;
     private Bitmap mNowPager;
@@ -72,14 +75,24 @@ public class ShowStoryView extends View{
     private Matrix mMatrix;
 
     private static final String TAG = "ShowStoryView";
+    private int mPagerCount = 1;
+    private String mNowContent = "AAAAAAAAAAAAAAAA,\n"+
+                                   " AAAAAAAAAAAAAAAAA";
+    private String mUpContent = "AAAAAAAAAAAAAAA";
+    private String mNextContet = "BBBBBBBBBBBBBBBBBBB";
+    private String mPreviousContent = "CCCCCCCCCCCCCCCCC";
 
     private String style;
+
+    private Scroller mScroller;
+
+    private LinkedList<String> mContents = new LinkedList<>();
     public static final String STYLE_LEFT = "STYLE_LEFT";//点击左边区域
     public static final String STYLE_RIGHT = "STYLE_RIGHT";//点击右边区域
     public static final String STYLE_MIDDLE = "STYLE_MIDDLE";//点击中间区域
     public static final String STYLE_TOP_RIGHT = "STYLE_TOP_RIGHT";//f点在右上角
-    public static final String STYLE_LOWER_LEFT = "STYLE_LOWER_LEFT";//f点在右下角
-    public static final String STYLE_TOP_LEFT = "STYLE_TOP_LEFT";//f点在右下角
+    public static final String STYLE_LOWER_LEFT = "STYLE_LOWER_LEFT";//f点在左下角
+    public static final String STYLE_TOP_LEFT = "STYLE_TOP_LEFT";//f点在左上角
     public static final String STYLE_LOWER_RIGHT = "STYLE_LOWER_RIGHT";//f点在右下角
 
 
@@ -100,13 +113,15 @@ public class ShowStoryView extends View{
     }
 
     private void init(){
+        mScroller = new Scroller(mContext);
         mAPaint = new Paint();
 
         mBPaint = new Paint();
         mCPaint = new Paint();
         mTextPaint = new Paint();
         mTextPaint.setColor(getResources().getColor(R.color.Text_color));
-        mTextPaint.setTextSize(16);
+        mTextPaint.setTextSize(24);
+
         mAPaint.setAntiAlias(true);
         mAPaint.setStyle(Paint.Style.STROKE);
         mAPaint.setStrokeWidth(2);
@@ -120,17 +135,17 @@ public class ShowStoryView extends View{
         mAPath = new Path();
         mBPath = new Path();
         mCPath = new Path();
-        A = new Point();
-        B = new Point();
-        C = new Point();
-        E = new Point();
-        K = new Point();
-        J = new Point();
-        H = new Point();
-        G = new Point();
-        F = new Point();
-        D = new Point();
-        I = new Point();
+        A = new FPoint();
+        B = new FPoint();
+        C = new FPoint();
+        E = new FPoint();
+        K = new FPoint();
+        J = new FPoint();
+        H = new FPoint();
+        G = new FPoint();
+        F = new FPoint();
+        D = new FPoint();
+        I = new FPoint();
 
         A.x = -1;
         A.y = -1;
@@ -145,14 +160,14 @@ public class ShowStoryView extends View{
     private void drawPathAContentBitmap(Bitmap bitmap,Paint pathPaint){
         Canvas canvas = new Canvas(bitmap);
         canvas.drawPath(getPathDefault(),pathPaint);
-        canvas.drawText("AAAAAAAAAAA",mViewWidth/2,mVieHeight/2,mTextPaint);
+        canvas.drawText(mNowContent,0,0,mTextPaint);
 
     }
 
     private void drawPathBContentBitmap(Bitmap bitmap,Paint pathPaint){
         Canvas canvas = new Canvas(bitmap);
         canvas.drawPath(getPathDefault(),pathPaint);
-        canvas.drawText("BBBBBBBBBBBB",mViewWidth/2,mVieHeight/2,mTextPaint);
+        canvas.drawText(mNextContet,0,0,mTextPaint);
     }
 
 
@@ -218,6 +233,14 @@ public class ShowStoryView extends View{
                   //  beginTrace("drawPathB");
                     drawPathBContent(canvas,getPathAFromLowerRight());
                   //  endTrace();
+                }else if (F.x ==0&&F.y == mVieHeight){
+                    drawPathAContent(canvas,getPathAFromLowerLeft());
+                    drawPathCContent(canvas,getPathAFromLowerLeft());
+                    drawPathBContent(canvas,getPathAFromLowerLeft());
+                }else if(F.x == 0&&F.y ==0){
+                    drawPathAContent(canvas,getPathAFromTopLeft());
+                    drawPathCContent(canvas,getPathAFromTopLeft());
+                    drawPathBContent(canvas,getPathAFromTopLeft());
                 }
             }
 
@@ -269,9 +292,10 @@ public class ShowStoryView extends View{
 
     private Path getPathB(){
         mBPath.reset();
-        mBPath.lineTo(0, F.y);//移动到左下角
-        mBPath.lineTo(F.x,F.y);//移动到右下角
-        mBPath.lineTo(F.x,0);//移动到右上角
+        mBPath.moveTo(0,0);
+        mBPath.lineTo(0, mVieHeight);
+        mBPath.lineTo(mViewWidth,mVieHeight);
+        mBPath.lineTo(mViewWidth,0);
         mBPath.close();//闭合区域
         return mBPath;
     }
@@ -312,6 +336,7 @@ public class ShowStoryView extends View{
         mAPath.quadTo(H.x,H.y,J.x,J.y);//从k到j画贝塞尔曲线，控制点为h
         mAPath.lineTo(mViewWidth,mVieHeight);//移动到右下角
         mAPath.lineTo(0,mVieHeight);
+        mAPath.lineTo(0,0);
         mAPath.close();
         return mAPath;
     }
@@ -325,6 +350,7 @@ public class ShowStoryView extends View{
         mAPath.lineTo(K.x,K.y);
         mAPath.quadTo(H.x,H.y,J.x,J.y);
         mAPath.lineTo(F.x,0);
+        mAPath.lineTo(0,0);
         mAPath.close();
         return mAPath;
     }
@@ -332,36 +358,44 @@ public class ShowStoryView extends View{
 
     private Path getPathAFromLowerLeft(){
         mAPath.reset();
-        mAPath.lineTo(0,0);
-        mAPath.lineTo(C.x,C.y);
-        mAPath.quadTo(E.x,E.y,B.x,B.y);
+        mAPath.moveTo(0,0);
+        mAPath.lineTo(J.x,J.y);
+        mAPath.quadTo(H.x,H.y,K.x,K.y);
         mAPath.lineTo(A.x,A.y);
-        mAPath.lineTo(K.x,K.y);
-        mAPath.quadTo(H.x,H.y,J.x,J.y);
-        mAPath.lineTo(mViewWidth,mVieHeight);//移动到右下角
+        mAPath.lineTo(B.x,B.y);
+        mAPath.quadTo(E.x,E.y,C.x,C.y);
+        mAPath.lineTo(mViewWidth,mVieHeight);
+        mAPath.lineTo(mViewWidth,0);
+
+
         mAPath.close();
 
         return mAPath;
     }
 
     private Path getPathAFromTopLeft(){
+
+
         mAPath.reset();
-        mAPath.lineTo(C.x,C.y);//移动到c点
-        mAPath.quadTo(E.x,E.y,B.x,B.y);//从c到b画贝塞尔曲线，控制点为e
-        mAPath.lineTo(A.x,A.y);//移动到a点
-        mAPath.lineTo(K.x,K.y);//移动到k点
-        mAPath.quadTo(H.x,H.y,J.x,J.y);//从k到j画贝塞尔曲线，控制点为h
-        mAPath.lineTo(0, mVieHeight);//移动到左下角
-        mAPath.lineTo(mViewWidth,mVieHeight);//移动到右下角
+        mAPath.moveTo(0,mVieHeight);
+        mAPath.lineTo(J.x,J.y);
+        mAPath.quadTo(H.x,H.y,K.x,K.y);
+        mAPath.lineTo(A.x,A.y);
+        mAPath.lineTo(B.x,B.y);
+        mAPath.quadTo(E.x,E.y,C.x,C.y);
+        mAPath.lineTo(mViewWidth,0);
+        mAPath.lineTo(mViewWidth,mVieHeight);
 
         mAPath.close();
 
+
         return mAPath;
+
     }
 
 
 
-    private Point getIntersectionPoint(Point lineOne_My_pointOne, Point lineOne_My_pointTwo, Point lineTwo_My_pointOne, Point lineTwo_My_pointTwo){
+    private FPoint getIntersectionPoint(FPoint lineOne_My_pointOne, FPoint lineOne_My_pointTwo, FPoint lineTwo_My_pointOne, FPoint lineTwo_My_pointTwo){
         float x1,y1,x2,y2,x3,y3,x4,y4;
         x1 = lineOne_My_pointOne.x;
         y1 = lineOne_My_pointOne.y;
@@ -377,51 +411,95 @@ public class ShowStoryView extends View{
         float pointY =((y1 - y2) * (x3 * y4 - x4 * y3) - (x1 * y2 - x2 * y1) * (y3 - y4))
                 / ((y1 - y2) * (x3 - x4) - (x1 - x2) * (y3 - y4));
 
-        return  new Point((int) pointX,(int) pointY);
+        return  new FPoint( pointX, pointY);
     }
 
-
-
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
-
         float x = event.getX();
         float y = event.getY();
+
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
-                if(x<=mViewWidth/3){//左
+                if(x<=mViewWidth/3&&y>mVieHeight/3&&y<=mVieHeight*2/3){//左
                     style = STYLE_LEFT;
-                    setTouchPoint((int) x,(int) y,style);
+                    setTouchPoint( x, y,style);
 
-                }else if(x>mViewWidth/3 && y<=mVieHeight/3){//上
+                }else if(x>mViewWidth/3 && y<=mVieHeight/3){//右上角
                     style = STYLE_TOP_RIGHT;
-                    setTouchPoint((int) x,(int) y,style);
+                    setTouchPoint(x, y,style);
 
                 }else if(x>mViewWidth*2/3 && y>mVieHeight/3 && y<=mVieHeight*2/3){//右
                     style = STYLE_RIGHT;
-                    setTouchPoint((int) x,(int) y,style);
+                    setTouchPoint( x,y,style);
 
-                }else if(x>mViewWidth/3 && y>mVieHeight*2/3){//下
+                }else if(x>mViewWidth/3 && y>mVieHeight*2/3){//右下角
                     style = STYLE_LOWER_RIGHT;
-                    setTouchPoint((int) x,(int) y,style);
+                    setTouchPoint( x,y,style);
 
                 }else if(x>mViewWidth/3 && x<mViewWidth*2/3
                         && y>mVieHeight/3 && y<mVieHeight*2/3){//中
                     style = STYLE_MIDDLE;
+                }else if (x<mViewWidth/3&&y<mVieHeight/3){//左上角
+
+                    style = STYLE_TOP_LEFT;
+                    setTouchPoint( x,y,style);
+
+                }else if(x<mViewWidth/2&&y>mVieHeight*2/3){
+                    style = STYLE_LOWER_LEFT;
+                    setTouchPoint( x,y,style);
+
+                }else if(x>mViewWidth*2/3&&y>mVieHeight/3&&y<mVieHeight*2/3){
+                    style = STYLE_RIGHT;
+                    setTouchPoint( x,y,style);
+
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
                 setTouchPoint((int) x,(int) y,style);
                 break;
             case MotionEvent.ACTION_UP:
-                //startCancelAnim();
+                startCancelAnim();
                 break;
         }
         return true;
     }
 
+    /**
+     * 取消翻页动画,计算滑动位置与时间
+     */
+    public void startCancelAnim(){
+        int dx,dy;
+        //让a滑动到f点所在位置，留出1像素是为了防止当a和f重叠时出现View闪烁的情况
+        if(style.equals(STYLE_TOP_RIGHT)){
+            dx = (int) (mViewWidth-1-A.x);
+            dy = (int) (1-A.y);
+        }else {
+            dx = (int) (mViewWidth-1-A.x);
+            dy = (int) (mVieHeight-1-A.y);
+        }
+        mScroller.startScroll((int) A.x, (int) A.y, dx, dy, 400);
+    }
 
-    public void setTouchPoint(int x, int y, String style){
-        Point touchPoint = new Point();
+
+    @Override
+    public void computeScroll() {
+        if (mScroller.computeScrollOffset()) {
+            float x = mScroller.getCurrX();
+            float y = mScroller.getCurrY();
+            if(style.equals(STYLE_TOP_RIGHT)){
+                setTouchPoint(x,y,STYLE_TOP_RIGHT);
+            }else {
+                setTouchPoint(x,y,STYLE_LOWER_RIGHT);
+            }
+            if (mScroller.getFinalX() == x && mScroller.getFinalY() == y){
+                setDefaultPath();
+            }
+        }
+    }
+
+    public void setTouchPoint(float x, float y, String style){
+        FPoint touchPoint = new FPoint();
         A.x =  x;
         A.y =  y;
         this.style = style;
@@ -430,7 +508,7 @@ public class ShowStoryView extends View{
                 F.x = mViewWidth;
                 F.y = 0;
                 calcPointsXY(A,F);
-                touchPoint = new Point(x,y);
+                touchPoint = new FPoint(x,y);
                 if(calcPointCX(touchPoint,F)<0){//如果c点x坐标小于0则重新测量a点坐标
                     calcPointAByTouchPoint();
                     calcPointsXY(A,F);
@@ -438,24 +516,57 @@ public class ShowStoryView extends View{
                 postInvalidate();
                 break;
             case STYLE_LEFT:
-            case STYLE_RIGHT:
                 A.y = mVieHeight-1;
-                F.x = mViewWidth;
-                F.y = mViewWidth;
+                F.x = 0;
+                F.y = mVieHeight;
                 calcPointsXY(A,F);
                 postInvalidate();
                 break;
-            case STYLE_LOWER_RIGHT:
+            case STYLE_RIGHT:
+
+
+                A.y = mVieHeight-1;
                 F.x = mViewWidth;
                 F.y = mVieHeight;
                 calcPointsXY(A,F);
-                touchPoint = new Point(x,y);
+                postInvalidate();
+                break;
+
+            case STYLE_LOWER_RIGHT:
+                F.x = mViewWidth;
+                F.y = mVieHeight;
+
+                calcPointsXY(A,F);
+                touchPoint = new FPoint(x,y);
                 if(calcPointCX(touchPoint,F)<0){//如果c点x坐标小于0则重新测量a点坐标
                     calcPointAByTouchPoint();
                     calcPointsXY(A,F);
                 }
                 postInvalidate();
                 break;
+            case STYLE_LOWER_LEFT:
+                F.x = 0;
+                F.y = mVieHeight;
+                calcPointsXY(A,F);
+                touchPoint = new FPoint(x,y);
+                if(calcPointCX(touchPoint,F)>mViewWidth){
+                    calcPointAByTouchPointLeft();
+                    calcPointsXY(A,F);
+                }
+                postInvalidate();
+                break;
+            case STYLE_TOP_LEFT:
+                F.x = 0;
+                F.y = 0;
+                calcPointsXY(A,F);
+                touchPoint = new FPoint(x,y);
+                if(calcPointCX(touchPoint,F)>mViewWidth){
+                    calcPointAByTouchPointLeft();
+                    calcPointsXY(A,F);
+                }
+                postInvalidate();
+                break;
+
             default:
                 break;
         }
@@ -465,18 +576,31 @@ public class ShowStoryView extends View{
      * 如果c点x坐标小于0,根据触摸点重新测量a点坐标
      */
     private void calcPointAByTouchPoint(){
-        float w0 = mViewWidth - C.x;
+        float w0 =Math.abs(mViewWidth - C.x);
 
         float w1 = Math.abs(F.x - A.x);
         float w2 = mViewWidth * w1 / w0;
-        A.x =(int) Math.abs(F.x - w2);
+        A.x = Math.abs(F.x - w2);
 
         float h1 = Math.abs(F.y - A.y);
         float h2 = w2 * h1 / w1;
-        A.y = (int) Math.abs(F.y - h2);
+        A.y =  Math.abs(F.y - h2);
     }
 
-    private void calcPointsXY(Point a, Point f){
+
+    private void calcPointAByTouchPointLeft(){
+        float w0 =C.x;
+
+        float w1 = Math.abs(F.x - A.x);
+        float w2 = mViewWidth * w1 / w0;
+        A.x = Math.abs(F.x - w2);
+
+        float h1 = Math.abs(F.y - A.y);
+        float h2 = w2 * h1 / w1;
+        A.y =  Math.abs(F.y - h2);
+    }
+
+    private void calcPointsXY(FPoint a, FPoint f){
         G.x = (a.x + f.x) / 2;
         G.y = (a.y + f.y) / 2;
 
@@ -484,6 +608,7 @@ public class ShowStoryView extends View{
         E.y = f.y;
 
         H.x = f.x;
+        Log.e(TAG, "calcPointsXY: "+f.y+" "+f.x);
         H.y = G.y - (f.x - G.x) * (f.x - G.x) / (f.y - G.y);
 
         C.x = E.x - (f.x - E.x) / 2;
@@ -514,10 +639,10 @@ public class ShowStoryView extends View{
 //        rPathAShadowDis = Math.abs((rA*i.x+rB*i.y+rC)/(float) Math.hypot(rA,rB));
     }
 
-    private float calcPointCX(Point a, Point f){
-        Point g,e;
-        g = new Point();
-        e = new Point();
+    private float calcPointCX(FPoint a, FPoint f){
+        FPoint g,e;
+        g = new FPoint();
+        e = new FPoint();
         g.x = (a.x + f.x) / 2;
         g.y = (a.y + f.y) / 2;
 
@@ -526,6 +651,12 @@ public class ShowStoryView extends View{
 
         return e.x - (f.x - e.x) / 2;
     }
+
+    public void setData(LinkedList<String> contents){
+        mContents = contents;
+    }
+
+
 
 
 }
