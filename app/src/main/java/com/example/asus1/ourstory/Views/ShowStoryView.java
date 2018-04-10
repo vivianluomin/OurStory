@@ -13,6 +13,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Region;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -160,14 +161,14 @@ public class ShowStoryView extends View{
     private void drawPathAContentBitmap(Bitmap bitmap,Paint pathPaint){
         Canvas canvas = new Canvas(bitmap);
         canvas.drawPath(getPathDefault(),pathPaint);
-        canvas.drawText(mNowContent,0,0,mTextPaint);
+        canvas.drawText(mNowContent,50,50,mTextPaint);
 
     }
 
     private void drawPathBContentBitmap(Bitmap bitmap,Paint pathPaint){
         Canvas canvas = new Canvas(bitmap);
         canvas.drawPath(getPathDefault(),pathPaint);
-        canvas.drawText(mNextContet,0,0,mTextPaint);
+        canvas.drawText(mNextContet,50,50,mTextPaint);
     }
 
 
@@ -262,7 +263,47 @@ public class ShowStoryView extends View{
         canvas.clipPath(getPathB(), Region.Op.REVERSE_DIFFERENCE);//裁剪出B区域中不同于与AC区域的部分
         canvas.drawBitmap(mNextPager, 0, 0, null);
 
+        drawPathBShaow(canvas);
         canvas.restore();
+    }
+
+    private void drawPathBShaow(Canvas canvas){
+        int deepColor = 0xff111111;
+        int lightColor = 0x55111111;
+        int[] gradientColors = new int[]{deepColor,lightColor};
+
+        int deepOffset = 0;
+        int lightOffset = 0;
+        float aTof = (float)Math.hypot(A.x-F.x,A.y-F.y);
+        float viewDiagonaLength =(float)Math.hypot(mViewWidth,mVieHeight);
+
+        int left;
+        int right;
+        int top = (int)C.y;
+        int bottom = (int) (viewDiagonaLength+C.y);
+        GradientDrawable gradientDrawable;
+        if(style.equals(STYLE_TOP_RIGHT)){//f点在右上角
+            //从左向右线性渐变
+            gradientDrawable =new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,gradientColors);
+            gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);//线性渐变
+
+            left = (int) (C.x - deepOffset);//c点位于左上角
+            right = (int) (C.x + aTof/6 + lightOffset);
+        }else {
+            //从右向左线性渐变
+            gradientDrawable =new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT,gradientColors);
+            gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+
+            left = (int) (C.x - aTof/6 - lightOffset);//c点位于左下角
+            right = (int) (C.x + deepOffset);
+        }
+        gradientDrawable.setBounds(left,top,right,bottom);//设置阴影矩形
+
+        float rotateDegrees = (float) Math.toDegrees(Math.atan2(E.x- F.x, H.y - F.y));//旋转角度
+        canvas.rotate(rotateDegrees, C.x, C.y);//以c为中心点旋转
+        gradientDrawable.draw(canvas);
+
+
     }
 
     private void drawPathCContent(Canvas canvas, Path pathA){
@@ -286,8 +327,50 @@ public class ShowStoryView extends View{
         mMatrix.postTranslate(E.x, E.y);//沿原XY轴方向位移得到 矩形A4 B4 C4 D4
         canvas.drawBitmap(mUpPager, mMatrix, null);
 
+        drawPathCShadow(canvas);
+
         canvas.restore();
     }
+
+
+    private void drawPathCShadow(Canvas canvas){
+        int deepColor = 0xff111111;//为了让效果更明显使用此颜色代码，具体可根据实际情况调整
+//        int deepColor = 0x55333333;
+        int lightColor = 0x00333333;
+        int[] gradientColors = {lightColor,deepColor};//渐变颜色数组
+
+        int deepOffset = 1;//深色端的偏移值
+        int lightOffset = -30;//浅色端的偏移值
+        float viewDiagonalLength = (float) Math.hypot(mViewWidth, mVieHeight);//view对角线长度
+        int midpoint_ce = (int) (C.x + E.x) / 2;//ce中点
+        int midpoint_jh = (int) (J.y + H.y) / 2;//jh中点
+        float minDisToControlPoint = Math.min(Math.abs(midpoint_ce - E.x), Math.abs(midpoint_jh - H.y));//中点到控制点的最小值
+
+        int left;
+        int right;
+        int top = (int) C.y;
+        int bottom = (int) (viewDiagonalLength + C.y);
+        GradientDrawable gradientDrawable;
+        if (style.equals(STYLE_TOP_RIGHT)) {
+            gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, gradientColors);
+            gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+
+            left = (int) (C.x - lightOffset);
+            right = (int) (C.x + minDisToControlPoint + deepOffset);
+        } else {
+            gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, gradientColors);
+            gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+
+            left = (int) (C.x - minDisToControlPoint - deepOffset);
+            right = (int) (C.x + lightOffset);
+        }
+        gradientDrawable.setBounds(left,top,right,bottom);
+
+        float mDegrees = (float) Math.toDegrees(Math.atan2(E.x- F.x, H.y - F.y));
+        canvas.rotate(mDegrees, C.x, C.y);
+        gradientDrawable.draw(canvas);
+    }
+
 
 
     private Path getPathB(){
