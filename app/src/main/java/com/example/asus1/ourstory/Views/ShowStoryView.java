@@ -268,8 +268,8 @@ public class ShowStoryView extends View{
     }
 
     private void drawPathBShaow(Canvas canvas){
-        int deepColor = 0xff111111;
-        int lightColor = 0x55111111;
+        int deepColor = 0x55111111;
+        int lightColor = 0x11111111;
         int[] gradientColors = new int[]{deepColor,lightColor};
 
         int deepOffset = 0;
@@ -334,7 +334,7 @@ public class ShowStoryView extends View{
 
 
     private void drawPathCShadow(Canvas canvas){
-        int deepColor = 0xff111111;//为了让效果更明显使用此颜色代码，具体可根据实际情况调整
+        int deepColor = 0x55111111;//为了让效果更明显使用此颜色代码，具体可根据实际情况调整
 //        int deepColor = 0x55333333;
         int lightColor = 0x00333333;
         int[] gradientColors = {lightColor,deepColor};//渐变颜色数组
@@ -552,14 +552,20 @@ public class ShowStoryView extends View{
      * 取消翻页动画,计算滑动位置与时间
      */
     public void startCancelAnim(){
-        int dx,dy;
-        //让a滑动到f点所在位置，留出1像素是为了防止当a和f重叠时出现View闪烁的情况
+        int dx=0,dy=0;
+
         if(style.equals(STYLE_TOP_RIGHT)){
-            dx = (int) (mViewWidth-1-A.x);
-            dy = (int) (1-A.y);
-        }else {
-            dx = (int) (mViewWidth-1-A.x);
-            dy = (int) (mVieHeight-1-A.y);
+           dx= (int)(-A.x+1);
+            dy = (int) (-A.y+1);
+        }else if(style.equals(STYLE_LOWER_RIGHT)){
+            dx= (int)(-A.x+1);
+            dy = (int) (A.y);
+        }else if(style.equals(STYLE_TOP_LEFT)){
+            dx = (int) (mViewWidth-A.x-1)*3;
+            dy = (int)(1-A.y);
+        }else if(style.equals(STYLE_LOWER_LEFT)){
+            dx = (int) (mViewWidth-A.x-1)*2;
+            dy = (int) (A.y-1);
         }
         mScroller.startScroll((int) A.x, (int) A.y, dx, dy, 400);
     }
@@ -572,8 +578,15 @@ public class ShowStoryView extends View{
             float y = mScroller.getCurrY();
             if(style.equals(STYLE_TOP_RIGHT)){
                 setTouchPoint(x,y,STYLE_TOP_RIGHT);
-            }else {
+
+            }else if(style.equals(STYLE_LOWER_RIGHT)) {
                 setTouchPoint(x,y,STYLE_LOWER_RIGHT);
+
+            }else if(style.equals(STYLE_TOP_LEFT)){
+                setTouchPoint(x,y,STYLE_TOP_LEFT);
+
+            }else if(style.equals(STYLE_LOWER_LEFT)){
+                setTouchPoint(x,y,STYLE_LOWER_LEFT);
             }
             if (mScroller.getFinalX() == x && mScroller.getFinalY() == y){
                 setDefaultPath();
