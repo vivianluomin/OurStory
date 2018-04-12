@@ -99,6 +99,10 @@ public class ShowStoryView extends View{
     private GradientDrawable mDrawableCTopLeft;
     private GradientDrawable mDrawableCLowerLeft;
 
+    private TextView mBTextView;
+
+    private PorterDuffXfermode SRC;
+
 
     private LinkedList<String> mContents = new LinkedList<>();
     public static final String STYLE_LEFT = "STYLE_LEFT";//点击左边区域
@@ -135,7 +139,8 @@ public class ShowStoryView extends View{
         mTextPaint = new Paint();
         mTextPaint.setColor(getResources().getColor(R.color.Text_color));
         mTextPaint.setTextSize(24);
-
+        mTextPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+         SRC = new PorterDuffXfermode(PorterDuff.Mode.SRC);
         mAPaint.setAntiAlias(true);
         mAPaint.setStyle(Paint.Style.STROKE);
         mAPaint.setStrokeWidth(2);
@@ -165,6 +170,10 @@ public class ShowStoryView extends View{
         A.y = -1;
 
         porter =  new PorterDuffXfermode(PorterDuff.Mode.DST_ATOP);
+        mBTextView = new TextView(mContext);
+        mBTextView.setTextSize(24);
+        mBTextView.setTextColor(getResources().getColor(R.color.Text_color));
+
        // mCPaint.setXfermode(porter);
         mMatrix = new Matrix();
         createGradientDrawable();
@@ -214,6 +223,7 @@ public class ShowStoryView extends View{
     }
 
     private void drawPathAContentBitmap(Bitmap bitmap,Paint pathPaint){
+
         Canvas canvas = new Canvas(bitmap);
         canvas.drawPath(getPathDefault(),pathPaint);
         canvas.drawText(mNowContent,50,50,mTextPaint);
@@ -221,8 +231,11 @@ public class ShowStoryView extends View{
     }
 
     private void drawPathBContentBitmap(Bitmap bitmap,Paint pathPaint){
-        Canvas canvas = new Canvas(bitmap);
+        mNextPager = mBg.copy(Bitmap.Config.RGB_565,true);
+        Canvas canvas = new Canvas(mNextPager);
         canvas.drawPath(getPathDefault(),pathPaint);
+//        mBTextView.setText(mNextContet);
+//        mBTextView.draw(canvas);
         canvas.drawText(mNextContet,50,50,mTextPaint);
     }
 
@@ -232,6 +245,8 @@ public class ShowStoryView extends View{
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         mViewWidth = MeasureSpec.getSize(widthMeasureSpec);
         mVieHeight = MeasureSpec.getSize(heightMeasureSpec);
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(mViewWidth,mVieHeight);
+        mBTextView.setLayoutParams(params);
         F.x = mViewWidth;
         F.y = mVieHeight;
         A.x = -1;
@@ -252,7 +267,8 @@ public class ShowStoryView extends View{
     }
 
 
-    private int measureSize(int defaultSize,int measureSpec) {
+
+    private int measureSize(int defaultSize, int measureSpec) {
         int result = defaultSize;
         int specMode = View.MeasureSpec.getMode(measureSpec);
         int specSize = View.MeasureSpec.getSize(measureSpec);
@@ -361,7 +377,6 @@ public class ShowStoryView extends View{
         canvas.save();
         canvas.clipPath(pathA);
         canvas.clipPath(getPathC(), Region.Op.REVERSE_DIFFERENCE);//裁剪出C区域不同于A区域的部分
-//        canvas.drawPath(getPathC(),pathCPaint);
 
         float eh = (float) Math.hypot(F.x - E.x,H.y - F.y);
         float sin0 = (F.x - E.x) / eh;
@@ -560,26 +575,31 @@ public class ShowStoryView extends View{
             case MotionEvent.ACTION_DOWN:
                if(x>mViewWidth/3 && y<=mVieHeight/3) {//右上角
                    style = STYLE_TOP_RIGHT;
+                   mNextContet = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+                   drawPathBContentBitmap(mNextPager,mBPaint);
                    setTouchPoint(x, y, style,false);
 
                }else if(x>mViewWidth/3 && y>mVieHeight*2/3){//右下角
                     style = STYLE_LOWER_RIGHT;
+                   mNextContet = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+                   drawPathBContentBitmap(mNextPager,mBPaint);
                     setTouchPoint( x,y,style,false);
 
                 }else if(x>mViewWidth/3 && x<mViewWidth*2/3
                         && y>mVieHeight/3 && y<mVieHeight*2/3){//中
                     style = STYLE_MIDDLE;
+
                 }else if (x<mViewWidth/3&&y<mVieHeight/3){//左上角
 
                     style = STYLE_TOP_LEFT;
+                    mNextContet = "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC";
+                   drawPathBContentBitmap(mNextPager,mBPaint);
                     setTouchPoint( x,y,style,false);
 
                 }else if(x<mViewWidth/2&&y>mVieHeight*2/3){
                     style = STYLE_LOWER_LEFT;
-                    setTouchPoint( x,y,style,false);
-
-                }else if(x>mViewWidth*2/3&&y>mVieHeight/3&&y<mVieHeight*2/3){
-                    style = STYLE_RIGHT;
+                   mNextContet = "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC";
+                   drawPathBContentBitmap(mNextPager,mBPaint);
                     setTouchPoint( x,y,style,false);
 
                 }
@@ -656,6 +676,7 @@ public class ShowStoryView extends View{
                     calcPointsXY(A,F);
                 }
                 postInvalidate();
+
                 break;
 //            case STYLE_LEFT:
 //                A.y = mVieHeight-1;
@@ -683,6 +704,7 @@ public class ShowStoryView extends View{
                     calcPointAByTouchPoint();
                     calcPointsXY(A,F);
                 }
+
                 postInvalidate();
                 break;
             case STYLE_LOWER_LEFT:
@@ -694,6 +716,7 @@ public class ShowStoryView extends View{
                     calcPointAByTouchPointLeft();
                     calcPointsXY(A,F);
                 }
+
                 postInvalidate();
                 break;
             case STYLE_TOP_LEFT:
@@ -705,6 +728,8 @@ public class ShowStoryView extends View{
                     calcPointAByTouchPointLeft();
                     calcPointsXY(A,F);
                 }
+
+
                 postInvalidate();
                 break;
 
@@ -796,6 +821,8 @@ public class ShowStoryView extends View{
     public void setData(LinkedList<String> contents){
         mContents = contents;
     }
+
+
 
 
 
