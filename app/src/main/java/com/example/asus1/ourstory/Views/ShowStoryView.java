@@ -174,33 +174,24 @@ public class ShowStoryView extends View{
 
 
     private void createGradientDrawable(){
-        int deepColor = 0x33333333;
-        int lightColor = 0x01333333;
-        int[] gradientColors = new int[]{lightColor,deepColor};//渐变颜色数组
+        int deepColor;
+        int lightColor;
+        int[] gradientColors ;
 
         deepColor = 0x55111111;
         lightColor = 0x00111111;
         gradientColors = new int[] {deepColor,lightColor};//渐变颜色数组
         mDrawableBTopRight =new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,gradientColors);
         mDrawableBTopRight.setGradientType(GradientDrawable.LINEAR_GRADIENT);//线性渐变
-        mDrawableBTopRight =new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT,gradientColors);
-        mDrawableBTopRight.setGradientType(GradientDrawable.LINEAR_GRADIENT);
 
-        mDrawableBTopLeft =new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,gradientColors);
-        mDrawableBTopLeft.setGradientType(GradientDrawable.LINEAR_GRADIENT);//线性渐变
         mDrawableBTopLeft =new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT,gradientColors);
-        mDrawableBTopLeft.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+        mDrawableBTopLeft.setGradientType(GradientDrawable.LINEAR_GRADIENT);//线性渐变
 
-        mDrawableBLowerRight =new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,gradientColors);
-        mDrawableBLowerRight.setGradientType(GradientDrawable.LINEAR_GRADIENT);//线性渐变
         mDrawableBLowerRight =new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT,gradientColors);
-        mDrawableBLowerRight.setGradientType(GradientDrawable.LINEAR_GRADIENT);
-
+        mDrawableBLowerRight.setGradientType(GradientDrawable.LINEAR_GRADIENT);//线性渐变
 
         mDrawableBLowerLeft =new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,gradientColors);
         mDrawableBLowerLeft.setGradientType(GradientDrawable.LINEAR_GRADIENT);//线性渐变
-        mDrawableBLowerLeft =new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT,gradientColors);
-        mDrawableBLowerLeft.setGradientType(GradientDrawable.LINEAR_GRADIENT);
 
 
 
@@ -209,24 +200,16 @@ public class ShowStoryView extends View{
         gradientColors = new int[]{lightColor,deepColor};//渐变颜色数组
         mDrawableCTopRight = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, gradientColors);
         mDrawableCTopRight.setGradientType(GradientDrawable.LINEAR_GRADIENT);
-        mDrawableCTopRight = new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, gradientColors);
-        mDrawableCTopRight.setGradientType(GradientDrawable.LINEAR_GRADIENT);
 
-        mDrawableCTopLeft = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, gradientColors);
-        mDrawableCTopLeft.setGradientType(GradientDrawable.LINEAR_GRADIENT);
         mDrawableCTopLeft = new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, gradientColors);
         mDrawableCTopLeft.setGradientType(GradientDrawable.LINEAR_GRADIENT);
 
-
-        mDrawableCLowerLeft = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, gradientColors);
-        mDrawableCLowerLeft.setGradientType(GradientDrawable.LINEAR_GRADIENT);
-        mDrawableCLowerLeft= new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, gradientColors);
+        mDrawableCLowerLeft= new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, gradientColors);
         mDrawableCLowerLeft.setGradientType(GradientDrawable.LINEAR_GRADIENT);
 
-        mDrawableCLowerRight = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, gradientColors);
+        mDrawableCLowerRight = new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, gradientColors);
         mDrawableCLowerRight.setGradientType(GradientDrawable.LINEAR_GRADIENT);
-        mDrawableCLowerRight= new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, gradientColors);
-        mDrawableCLowerRight.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+
 
     }
 
@@ -295,15 +278,8 @@ public class ShowStoryView extends View{
                     drawPathCContent(canvas,getPathAFromTopRight());
                     drawPathBContent(canvas,getPathAFromTopRight());
                 }else if(F.x == mViewWidth &&F.y == mVieHeight){
-                    //beginTrace("drawPathA");
                     drawPathAContent(canvas,getPathAFromLowerRight());
-                   // endTrace();
-
-                  //  beginTrace("drawPathC");
                     drawPathCContent(canvas,getPathAFromLowerRight());
-                  //  endTrace();
-
-                  //  beginTrace("drawPathB");
                     drawPathBContent(canvas,getPathAFromLowerRight());
                   //  endTrace();
                 }else if (F.x ==0&&F.y == mVieHeight){
@@ -340,9 +316,6 @@ public class ShowStoryView extends View{
     }
 
     private void drawPathBShaow(Canvas canvas){
-        int deepColor = 0x55111111;
-        int lightColor = 0x11111111;
-        int[] gradientColors = new int[]{deepColor,lightColor};
 
         int deepOffset = 0;
         int lightOffset = 0;
@@ -353,23 +326,27 @@ public class ShowStoryView extends View{
         int right=0;
         int top = (int)C.y;
         int bottom = (int) (viewDiagonaLength+C.y);
+        //float rotateDegrees;
         GradientDrawable gradientDrawable;
-        if(style.equals(STYLE_TOP_RIGHT)){//f点在右上角
-            //从左向右线性渐变
+        if(style.equals(STYLE_TOP_RIGHT)){
           gradientDrawable = mDrawableBTopRight;
-            left = (int) (C.x - deepOffset);//c点位于左上角
+            left = (int) (C.x - deepOffset);
             right = (int) (C.x + aTof/6 + lightOffset);
-        }else if(style.equals(STYLE_LOWER_RIGHT)){
-            //从右向左线性渐变
-           gradientDrawable = mDrawableBLowerRight;
 
-            left = (int) (C.x - aTof/6 - lightOffset);//c点位于左下角
-            right = (int) (C.x + deepOffset);
+        }else if(style.equals(STYLE_LOWER_RIGHT)){
+           gradientDrawable = mDrawableBLowerRight;
+            left = (int) (C.x -aTof/6-lightOffset);
+            right = (int) (C.x +deepOffset);
+
         }else if(style.equals(STYLE_TOP_LEFT)){
             gradientDrawable = mDrawableBTopLeft;
-
+            left = (int) (C.x - aTof/6 - lightOffset);
+            right = (int) (C.x + deepOffset);
         }else {
             gradientDrawable = mDrawableBLowerLeft;
+            left = (int) (C.x  - lightOffset);
+            right = (int) (C.x + aTof/6 + deepOffset);
+
         }
         gradientDrawable.setBounds(left,top,right,bottom);//设置阴影矩形
 
@@ -408,10 +385,6 @@ public class ShowStoryView extends View{
 
 
     private void drawPathCShadow(Canvas canvas){
-        int deepColor = 0x55111111;//为了让效果更明显使用此颜色代码，具体可根据实际情况调整
-//        int deepColor = 0x55333333;
-        int lightColor = 0x00333333;
-        int[] gradientColors = {lightColor,deepColor};//渐变颜色数组
 
         int deepOffset = 1;//深色端的偏移值
         int lightOffset = -30;//浅色端的偏移值
@@ -420,23 +393,30 @@ public class ShowStoryView extends View{
         int midpoint_jh = (int) (J.y + H.y) / 2;//jh中点
         float minDisToControlPoint = Math.min(Math.abs(midpoint_ce - E.x), Math.abs(midpoint_jh - H.y));//中点到控制点的最小值
 
-        int left;
-        int right;
+        int left=0;
+        int right=0;
         int top = (int) C.y;
         int bottom = (int) (viewDiagonalLength + C.y);
         GradientDrawable gradientDrawable;
         if (style.equals(STYLE_TOP_RIGHT)) {
-            gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, gradientColors);
-            gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
-
+            gradientDrawable = mDrawableCTopRight;
             left = (int) (C.x - lightOffset);
             right = (int) (C.x + minDisToControlPoint + deepOffset);
-        } else {
-            gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, gradientColors);
-            gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+        } else if(style.equals(STYLE_LOWER_RIGHT)) {
+            gradientDrawable = mDrawableCLowerRight;
+            left = (int) (C.x -minDisToControlPoint-deepOffset);
+            right = (int) (C.x +lightOffset);
+        }else if(style.equals(STYLE_TOP_LEFT)){
 
-            left = (int) (C.x - minDisToControlPoint - deepOffset);
-            right = (int) (C.x + lightOffset);
+            gradientDrawable = mDrawableCTopLeft;
+            left = (int) (C.x-minDisToControlPoint-deepOffset);
+            right = (int) (C.x +lightOffset);
+
+        }else {
+            gradientDrawable = mDrawableCLowerLeft;
+            left = (int) (C.x -lightOffset);
+            right = (int) (C.x +minDisToControlPoint+deepOffset);
+
         }
         gradientDrawable.setBounds(left,top,right,bottom);
 
