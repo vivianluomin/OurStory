@@ -87,6 +87,19 @@ public class ShowStoryView extends View{
 
     private Scroller mScroller;
 
+    private GradientDrawable mDrawableBTopRight;
+    private GradientDrawable mDrawableBLowerRight;
+
+    private GradientDrawable mDrawableCTopRight;
+    private GradientDrawable mDrawableCLowerRight;
+
+    private GradientDrawable mDrawableBTopLeft;
+    private GradientDrawable mDrawableBLowerLeft;
+
+    private GradientDrawable mDrawableCTopLeft;
+    private GradientDrawable mDrawableCLowerLeft;
+
+
     private LinkedList<String> mContents = new LinkedList<>();
     public static final String STYLE_LEFT = "STYLE_LEFT";//点击左边区域
     public static final String STYLE_RIGHT = "STYLE_RIGHT";//点击右边区域
@@ -154,7 +167,66 @@ public class ShowStoryView extends View{
         porter =  new PorterDuffXfermode(PorterDuff.Mode.DST_ATOP);
        // mCPaint.setXfermode(porter);
         mMatrix = new Matrix();
+        createGradientDrawable();
         style = STYLE_LOWER_RIGHT;
+
+    }
+
+
+    private void createGradientDrawable(){
+        int deepColor = 0x33333333;
+        int lightColor = 0x01333333;
+        int[] gradientColors = new int[]{lightColor,deepColor};//渐变颜色数组
+
+        deepColor = 0x55111111;
+        lightColor = 0x00111111;
+        gradientColors = new int[] {deepColor,lightColor};//渐变颜色数组
+        mDrawableBTopRight =new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,gradientColors);
+        mDrawableBTopRight.setGradientType(GradientDrawable.LINEAR_GRADIENT);//线性渐变
+        mDrawableBTopRight =new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT,gradientColors);
+        mDrawableBTopRight.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+
+        mDrawableBTopLeft =new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,gradientColors);
+        mDrawableBTopLeft.setGradientType(GradientDrawable.LINEAR_GRADIENT);//线性渐变
+        mDrawableBTopLeft =new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT,gradientColors);
+        mDrawableBTopLeft.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+
+        mDrawableBLowerRight =new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,gradientColors);
+        mDrawableBLowerRight.setGradientType(GradientDrawable.LINEAR_GRADIENT);//线性渐变
+        mDrawableBLowerRight =new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT,gradientColors);
+        mDrawableBLowerRight.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+
+
+        mDrawableBLowerLeft =new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,gradientColors);
+        mDrawableBLowerLeft.setGradientType(GradientDrawable.LINEAR_GRADIENT);//线性渐变
+        mDrawableBLowerLeft =new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT,gradientColors);
+        mDrawableBLowerLeft.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+
+
+
+        deepColor = 0x55333333;
+        lightColor = 0x00333333;
+        gradientColors = new int[]{lightColor,deepColor};//渐变颜色数组
+        mDrawableCTopRight = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, gradientColors);
+        mDrawableCTopRight.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+        mDrawableCTopRight = new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, gradientColors);
+        mDrawableCTopRight.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+
+        mDrawableCTopLeft = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, gradientColors);
+        mDrawableCTopLeft.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+        mDrawableCTopLeft = new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, gradientColors);
+        mDrawableCTopLeft.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+
+
+        mDrawableCLowerLeft = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, gradientColors);
+        mDrawableCLowerLeft.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+        mDrawableCLowerLeft= new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, gradientColors);
+        mDrawableCLowerLeft.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+
+        mDrawableCLowerRight = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, gradientColors);
+        mDrawableCLowerRight.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+        mDrawableCLowerRight= new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, gradientColors);
+        mDrawableCLowerRight.setGradientType(GradientDrawable.LINEAR_GRADIENT);
 
     }
 
@@ -277,25 +349,27 @@ public class ShowStoryView extends View{
         float aTof = (float)Math.hypot(A.x-F.x,A.y-F.y);
         float viewDiagonaLength =(float)Math.hypot(mViewWidth,mVieHeight);
 
-        int left;
-        int right;
+        int left=0;
+        int right=0;
         int top = (int)C.y;
         int bottom = (int) (viewDiagonaLength+C.y);
         GradientDrawable gradientDrawable;
         if(style.equals(STYLE_TOP_RIGHT)){//f点在右上角
             //从左向右线性渐变
-            gradientDrawable =new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,gradientColors);
-            gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);//线性渐变
-
+          gradientDrawable = mDrawableBTopRight;
             left = (int) (C.x - deepOffset);//c点位于左上角
             right = (int) (C.x + aTof/6 + lightOffset);
-        }else {
+        }else if(style.equals(STYLE_LOWER_RIGHT)){
             //从右向左线性渐变
-            gradientDrawable =new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT,gradientColors);
-            gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+           gradientDrawable = mDrawableBLowerRight;
 
             left = (int) (C.x - aTof/6 - lightOffset);//c点位于左下角
             right = (int) (C.x + deepOffset);
+        }else if(style.equals(STYLE_TOP_LEFT)){
+            gradientDrawable = mDrawableBTopLeft;
+
+        }else {
+            gradientDrawable = mDrawableBLowerLeft;
         }
         gradientDrawable.setBounds(left,top,right,bottom);//设置阴影矩形
 
@@ -504,21 +578,13 @@ public class ShowStoryView extends View{
 
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
-                if(x<=mViewWidth/3&&y>mVieHeight/3&&y<=mVieHeight*2/3){//左
-                    style = STYLE_LEFT;
-                    setTouchPoint( x, y,style);
+               if(x>mViewWidth/3 && y<=mVieHeight/3) {//右上角
+                   style = STYLE_TOP_RIGHT;
+                   setTouchPoint(x, y, style,false);
 
-                }else if(x>mViewWidth/3 && y<=mVieHeight/3){//右上角
-                    style = STYLE_TOP_RIGHT;
-                    setTouchPoint(x, y,style);
-
-                }else if(x>mViewWidth*2/3 && y>mVieHeight/3 && y<=mVieHeight*2/3){//右
-                    style = STYLE_RIGHT;
-                    setTouchPoint( x,y,style);
-
-                }else if(x>mViewWidth/3 && y>mVieHeight*2/3){//右下角
+               }else if(x>mViewWidth/3 && y>mVieHeight*2/3){//右下角
                     style = STYLE_LOWER_RIGHT;
-                    setTouchPoint( x,y,style);
+                    setTouchPoint( x,y,style,false);
 
                 }else if(x>mViewWidth/3 && x<mViewWidth*2/3
                         && y>mVieHeight/3 && y<mVieHeight*2/3){//中
@@ -526,20 +592,20 @@ public class ShowStoryView extends View{
                 }else if (x<mViewWidth/3&&y<mVieHeight/3){//左上角
 
                     style = STYLE_TOP_LEFT;
-                    setTouchPoint( x,y,style);
+                    setTouchPoint( x,y,style,false);
 
                 }else if(x<mViewWidth/2&&y>mVieHeight*2/3){
                     style = STYLE_LOWER_LEFT;
-                    setTouchPoint( x,y,style);
+                    setTouchPoint( x,y,style,false);
 
                 }else if(x>mViewWidth*2/3&&y>mVieHeight/3&&y<mVieHeight*2/3){
                     style = STYLE_RIGHT;
-                    setTouchPoint( x,y,style);
+                    setTouchPoint( x,y,style,false);
 
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
-                setTouchPoint((int) x,(int) y,style);
+                setTouchPoint((int) x,(int) y,style,false);
                 break;
             case MotionEvent.ACTION_UP:
                 startCancelAnim();
@@ -555,17 +621,17 @@ public class ShowStoryView extends View{
         int dx=0,dy=0;
 
         if(style.equals(STYLE_TOP_RIGHT)){
-           dx= (int)(-A.x+1);
-            dy = (int) (-A.y+1);
+           dx= (int)(-A.x-mViewWidth);
+            dy = (int) (-A.y);
         }else if(style.equals(STYLE_LOWER_RIGHT)){
-            dx= (int)(-A.x+1);
-            dy = (int) (A.y);
+            dx= (int)(-A.x-mViewWidth);
+            dy = (int) (mVieHeight-A.y);
         }else if(style.equals(STYLE_TOP_LEFT)){
-            dx = (int) (mViewWidth-A.x-1)*3;
+            dx = (int) (mViewWidth*2-A.x);
             dy = (int)(1-A.y);
         }else if(style.equals(STYLE_LOWER_LEFT)){
-            dx = (int) (mViewWidth-A.x-1)*2;
-            dy = (int) (A.y-1);
+            dx = (int) (mViewWidth*2-A.x);
+            dy = (int) (mVieHeight-A.y);
         }
         mScroller.startScroll((int) A.x, (int) A.y, dx, dy, 400);
     }
@@ -577,16 +643,16 @@ public class ShowStoryView extends View{
             float x = mScroller.getCurrX();
             float y = mScroller.getCurrY();
             if(style.equals(STYLE_TOP_RIGHT)){
-                setTouchPoint(x,y,STYLE_TOP_RIGHT);
+                setTouchPoint(x,y,STYLE_TOP_RIGHT,true);
 
             }else if(style.equals(STYLE_LOWER_RIGHT)) {
-                setTouchPoint(x,y,STYLE_LOWER_RIGHT);
+                setTouchPoint(x,y,STYLE_LOWER_RIGHT,true);
 
             }else if(style.equals(STYLE_TOP_LEFT)){
-                setTouchPoint(x,y,STYLE_TOP_LEFT);
+                setTouchPoint(x,y,STYLE_TOP_LEFT,true);
 
             }else if(style.equals(STYLE_LOWER_LEFT)){
-                setTouchPoint(x,y,STYLE_LOWER_LEFT);
+                setTouchPoint(x,y,STYLE_LOWER_LEFT,true);
             }
             if (mScroller.getFinalX() == x && mScroller.getFinalY() == y){
                 setDefaultPath();
@@ -594,7 +660,7 @@ public class ShowStoryView extends View{
         }
     }
 
-    public void setTouchPoint(float x, float y, String style){
+    public void setTouchPoint(float x, float y, String style,boolean scroll){
         FPoint touchPoint = new FPoint();
         A.x =  x;
         A.y =  y;
@@ -605,28 +671,27 @@ public class ShowStoryView extends View{
                 F.y = 0;
                 calcPointsXY(A,F);
                 touchPoint = new FPoint(x,y);
-                if(calcPointCX(touchPoint,F)<0){//如果c点x坐标小于0则重新测量a点坐标
+                if(!scroll&&calcPointCX(touchPoint,F)<0){//如果c点x坐标小于0则重新测量a点坐标
                     calcPointAByTouchPoint();
                     calcPointsXY(A,F);
                 }
                 postInvalidate();
                 break;
-            case STYLE_LEFT:
-                A.y = mVieHeight-1;
-                F.x = 0;
-                F.y = mVieHeight;
-                calcPointsXY(A,F);
-                postInvalidate();
-                break;
-            case STYLE_RIGHT:
-
-
-                A.y = mVieHeight-1;
-                F.x = mViewWidth;
-                F.y = mVieHeight;
-                calcPointsXY(A,F);
-                postInvalidate();
-                break;
+//            case STYLE_LEFT:
+//                A.y = mVieHeight-1;
+//                F.x = 0;
+//                F.y = mVieHeight;
+//                calcPointsXY(A,F);
+//                postInvalidate();
+//                break;
+//            case STYLE_RIGHT:
+//
+//                A.y = mVieHeight-1;
+//                F.x = mViewWidth;
+//                F.y = mVieHeight;
+//                calcPointsXY(A,F);
+//                postInvalidate();
+//                break;
 
             case STYLE_LOWER_RIGHT:
                 F.x = mViewWidth;
@@ -634,7 +699,7 @@ public class ShowStoryView extends View{
 
                 calcPointsXY(A,F);
                 touchPoint = new FPoint(x,y);
-                if(calcPointCX(touchPoint,F)<0){//如果c点x坐标小于0则重新测量a点坐标
+                if(!scroll&&calcPointCX(touchPoint,F)<0){//如果c点x坐标小于0则重新测量a点坐标
                     calcPointAByTouchPoint();
                     calcPointsXY(A,F);
                 }
@@ -645,7 +710,7 @@ public class ShowStoryView extends View{
                 F.y = mVieHeight;
                 calcPointsXY(A,F);
                 touchPoint = new FPoint(x,y);
-                if(calcPointCX(touchPoint,F)>mViewWidth){
+                if(!scroll&&calcPointCX(touchPoint,F)>mViewWidth){
                     calcPointAByTouchPointLeft();
                     calcPointsXY(A,F);
                 }
@@ -656,7 +721,7 @@ public class ShowStoryView extends View{
                 F.y = 0;
                 calcPointsXY(A,F);
                 touchPoint = new FPoint(x,y);
-                if(calcPointCX(touchPoint,F)>mViewWidth){
+                if(!scroll&&calcPointCX(touchPoint,F)>mViewWidth){
                     calcPointAByTouchPointLeft();
                     calcPointsXY(A,F);
                 }
