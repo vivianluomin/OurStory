@@ -231,6 +231,7 @@ public class ShowStoryView extends View{
     }
 
     private void drawPathBContentBitmap(Bitmap bitmap,Paint pathPaint){
+        mNextPager.recycle();
         mNextPager = mBg.copy(Bitmap.Config.RGB_565,true);
         Canvas canvas = new Canvas(mNextPager);
         canvas.drawPath(getPathDefault(),pathPaint);

@@ -4,11 +4,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 
+import com.ashokvarma.bottomnavigation.BadgeItem;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.example.asus1.ourstory.Fragments.AccountFragment;
 import com.example.asus1.ourstory.Fragments.BookShelfFragment;
 import com.example.asus1.ourstory.Fragments.FindFragment;
+import com.example.asus1.ourstory.Fragments.MessageFragment;
 import com.example.asus1.ourstory.R;
 
 public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener {
@@ -18,6 +20,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     private FragmentTransaction mFragmentTransaction;
 
     private int mNow;
+
+    private BadgeItem mMessageBage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +34,13 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
     private void init(){
 
+        mMessageBage = new BadgeItem();
+        mMessageBage.setText("3");
+        mMessageBage.setTextColorResource(R.color.white);
+        mMessageBage.setBackgroundColorResource(R.color.red_200);
         mBottonBar = (BottomNavigationBar)findViewById(R.id.bottom_nav_bar);
         mBottonBar.setTabSelectedListener(this);
-        mBottonBar.setMode(BottomNavigationBar.MODE_DEFAULT);
+        mBottonBar.setMode(BottomNavigationBar.MODE_FIXED);
         mBottonBar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC);
         mBottonBar.setBarBackgroundColor(R.color.bg_color);
         mBottonBar.addItem(new BottomNavigationItem(R.mipmap.ic_bookshelf,R.string.bookshelf)
@@ -41,6 +49,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 .addItem(new BottomNavigationItem(R.mipmap.ic_find,R.string.find)
                         .setActiveColorResource(R.color.main_bule)
                         .setInActiveColorResource(R.color.Text_color))
+                .addItem(new BottomNavigationItem(R.mipmap.ic_message,R.string.message)
+                        .setActiveColorResource(R.color.main_bule)
+                        .setInActiveColorResource(R.color.Text_color)
+                        .setBadgeItem(mMessageBage))
                 .addItem(new BottomNavigationItem(R.mipmap.ic_account1,R.string.account)
                         .setActiveColorResource(R.color.main_bule)
                         .setInActiveColorResource(R.color.Text_color))
@@ -77,9 +89,16 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 break;
             case 2:
                 if(mNow!=2){
-                    mFragmentTransaction.replace(R.id.frame_container,new AccountFragment());
+                    mFragmentTransaction.replace(R.id.frame_container,new MessageFragment());
                     mFragmentTransaction.commit();
                     mNow = 2;
+                }
+                break;
+            case 3:
+                if(mNow!=3){
+                    mFragmentTransaction.replace(R.id.frame_container,new AccountFragment());
+                    mFragmentTransaction.commit();
+                    mNow = 3;
                 }
                 break;
         }
