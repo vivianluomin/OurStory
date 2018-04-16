@@ -23,6 +23,7 @@
         app:tabTextColor="@color/gray"
         app:tabBackground="@color/main_bule"
         android:background="@color/main_bule"
+        app:tabTextAppearance="@style/TextAppearance.AppCompat.Small"
         >
     </android.support.design.widget.TabLayout>
 
