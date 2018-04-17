@@ -18,21 +18,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginLeft="58dp"
         >
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="58dp"
-            >
 
+            android:orientation="vertical"
+            >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_username"
                 android:textSize="14sp"
-                android:text="XXX评论了你"
+                android:textColor="#00868B"
+                android:text="XXXX"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -40,29 +42,24 @@
                 android:id="@+id/tv_comment"
                 android:paddingTop="4dp"
                 android:textSize="14sp"
-                android:text="你这个脑洞真大，我喜欢哈哈哈哈"
+                android:maxLines="1"
+                android:text="你这个脑洞真大，我喜欢哈哈哈..."
                 android:textColor="@color/Text_color"
                 />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_time"
-                android:paddingTop="4dp"
-                android:textSize="12sp"
-                android:textColor="@color/second_text_color"
-                android:text="2018-03-18"
-                />
+
 
         </LinearLayout>
 
-
         <TextView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:id="@+id/tv_about"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_time"
+            android:layout_gravity="right"
+            android:paddingTop="4dp"
+            android:layout_marginRight="16dp"
             android:textSize="12sp"
             android:textColor="@color/second_text_color"
-            android:text="显示12个字符d的，参数读..."
+            android:text="2018-03-18"
             />
 
 
