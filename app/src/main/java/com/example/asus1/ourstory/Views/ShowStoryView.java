@@ -11,6 +11,7 @@ import android.graphics.Path;
 
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.graphics.RectF;
 import android.graphics.Region;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.GradientDrawable;
@@ -19,9 +20,16 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.INotificationSideChannel;
 import android.support.v7.widget.AppCompatTextView;
+import android.text.Layout;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.SpannedString;
+import android.text.StaticLayout;
+import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,7 +85,7 @@ public class ShowStoryView extends View{
 
     private static final String TAG = "ShowStoryView";
     private int mPagerCount = 1;
-    private String mNowContent = "AAAAAAAAAAAAAAAA,\n"+
+    private String mNowContent = "这一天，天神发货，查斯柯达乐居从我氨氯了插上电控【if哦我哦哦我安啦宽度设成坚实的考虑呢,\n"+
                                    " AAAAAAAAAAAAAAAAA";
     private String mUpContent = "AAAAAAAAAAAAAAA";
     private String mNextContet = "BBBBBBBBBBBBBBBBBBB";
@@ -102,6 +110,9 @@ public class ShowStoryView extends View{
     private TextView mBTextView;
 
     private PorterDuffXfermode SRC;
+    private StaticLayout mLayout;
+
+    private TextPaint mTextPainter;
 
 
     private LinkedList<String> mContents = new LinkedList<>();
@@ -138,7 +149,7 @@ public class ShowStoryView extends View{
         mCPaint = new Paint();
         mTextPaint = new Paint();
         mTextPaint.setColor(getResources().getColor(R.color.Text_color));
-        mTextPaint.setTextSize(24);
+        mTextPaint.setTextSize(30);
         mTextPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
          SRC = new PorterDuffXfermode(PorterDuff.Mode.SRC);
         mAPaint.setAntiAlias(true);
@@ -173,6 +184,11 @@ public class ShowStoryView extends View{
         mBTextView = new TextView(mContext);
         mBTextView.setTextSize(24);
         mBTextView.setTextColor(getResources().getColor(R.color.Text_color));
+        mTextPainter = new TextPaint();
+        mTextPainter.setColor(getResources().getColor(R.color.Text_color));
+        mTextPainter.setStyle(Paint.Style.FILL);
+        mTextPainter.setTextSize(60);
+
 
        // mCPaint.setXfermode(porter);
         mMatrix = new Matrix();
@@ -226,7 +242,12 @@ public class ShowStoryView extends View{
 
         Canvas canvas = new Canvas(bitmap);
         canvas.drawPath(getPathDefault(),pathPaint);
-        canvas.drawText(mNowContent,50,50,mTextPaint);
+       // canvas.drawText(mNowContent,50,100,mTextPaint);
+        mLayout = new StaticLayout(mNowContent,mTextPainter
+                ,mViewWidth-50, Layout.Alignment.ALIGN_NORMAL,
+                1.5f,0f,false);
+        canvas.translate(50,100);
+        mLayout.draw(canvas);
 
     }
 
@@ -236,8 +257,14 @@ public class ShowStoryView extends View{
         Canvas canvas = new Canvas(mNextPager);
         canvas.drawPath(getPathDefault(),pathPaint);
 //        mBTextView.setText(mNextContet);
-//        mBTextView.draw(canvas);
-        canvas.drawText(mNextContet,50,50,mTextPaint);
+//        mBTextView.draw(canvas)
+        mLayout = new StaticLayout(mNextContet,mTextPainter
+                ,mViewWidth-100, Layout.Alignment.ALIGN_NORMAL,
+                1.5f,0f,false);
+        canvas.translate(50,100);
+        mLayout.draw(canvas);
+       // canvas.drawText(mNextContet,50,100,mTextPaint);
+
     }
 
 
@@ -255,6 +282,7 @@ public class ShowStoryView extends View{
         options = new BitmapFactory.Options();
         options.outHeight = mVieHeight;
         options.outWidth = mViewWidth;
+
         mBg = BitmapFactory.decodeResource(getResources(),R.drawable.bg_read,options);
        // mNowPager = Bitmap.createBitmap(mViewWidth,mVieHeight, Bitmap.Config.RGB_565);
         mNowPager = mBg.copy(Bitmap.Config.RGB_565,true);
@@ -590,6 +618,7 @@ public class ShowStoryView extends View{
                         && y>mVieHeight/3 && y<mVieHeight*2/3){//中
                     style = STYLE_MIDDLE;
 
+
                 }else if (x<mViewWidth/3&&y<mVieHeight/3){//左上角
 
                     style = STYLE_TOP_LEFT;
@@ -817,6 +846,11 @@ public class ShowStoryView extends View{
         e.y = f.y;
 
         return e.x - (f.x - e.x) / 2;
+    }
+
+
+    private void showPopWindow(){
+
     }
 
     public void setData(LinkedList<String> contents){
