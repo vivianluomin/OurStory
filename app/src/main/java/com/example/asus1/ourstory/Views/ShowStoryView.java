@@ -30,10 +30,15 @@ import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.Scroller;
 import android.widget.TextView;
 
@@ -109,10 +114,16 @@ public class ShowStoryView extends View{
 
     private TextView mBTextView;
 
-    private PorterDuffXfermode SRC;
     private StaticLayout mLayout;
 
     private TextPaint mTextPainter;
+
+    private PopupWindow mTopWindow;
+    private PopupWindow mBottomWindow;
+    private PopupWindow mMoreWindow;
+    private ImageView mShowMore;
+
+    private Window mParentWindow;
 
 
     private LinkedList<String> mContents = new LinkedList<>();
@@ -151,7 +162,6 @@ public class ShowStoryView extends View{
         mTextPaint.setColor(getResources().getColor(R.color.Text_color));
         mTextPaint.setTextSize(30);
         mTextPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
-         SRC = new PorterDuffXfermode(PorterDuff.Mode.SRC);
         mAPaint.setAntiAlias(true);
         mAPaint.setStyle(Paint.Style.STROKE);
         mAPaint.setStrokeWidth(2);
@@ -188,6 +198,35 @@ public class ShowStoryView extends View{
         mTextPainter.setColor(getResources().getColor(R.color.Text_color));
         mTextPainter.setStyle(Paint.Style.FILL);
         mTextPainter.setTextSize(60);
+
+        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_pop_top,null);
+        mTopWindow = new BookPopupWIndow(mContext,view,WindowManager.LayoutParams.MATCH_PARENT
+                , WindowManager.LayoutParams.MATCH_PARENT,true);
+
+        mTopWindow.setFocusable(true);
+        mTopWindow.setOutsideTouchable(true);
+        mTopWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                if(mParentWindow!=null){
+                    mParentWindow.setStatusBarColor(Color.TRANSPARENT);
+                }
+            }
+        });
+
+
+//        view = LayoutInflater.from(mContext).inflate(R.layout.layout_pop_bottom,null);
+//        mBottomWindow = new PopupWindow(view,WindowManager.LayoutParams.MATCH_PARENT
+//                ,200,true);
+//        mBottomWindow.setFocusable(true);
+//      //  mBottomWindow.setAnimationStyle(R.style.PopwindowBottomAnim);
+//       mBottomWindow.setOutsideTouchable(true);
+//       mBottomWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+//           @Override
+//           public void onDismiss() {
+//               mTopWindow.dismiss();
+//           }
+//       });
 
 
        // mCPaint.setXfermode(porter);
@@ -617,6 +656,7 @@ public class ShowStoryView extends View{
                 }else if(x>mViewWidth/3 && x<mViewWidth*2/3
                         && y>mVieHeight/3 && y<mVieHeight*2/3){//中
                     style = STYLE_MIDDLE;
+                    showPopWindow();
 
 
                 }else if (x<mViewWidth/3&&y<mVieHeight/3){//左上角
@@ -850,7 +890,11 @@ public class ShowStoryView extends View{
 
 
     private void showPopWindow(){
-
+            if(mParentWindow!=null){
+                mParentWindow.setStatusBarColor(getResources().getColor(R.color.main_bule));
+            }
+            mTopWindow.showAtLocation(this, Gravity.TOP,0,0);
+           // mBottomWindow.showAtLocation(this,Gravity.BOTTOM,0,0);
     }
 
     public void setData(LinkedList<String> contents){
@@ -858,6 +902,9 @@ public class ShowStoryView extends View{
     }
 
 
+    public void setWindow(Window window){
+        mParentWindow = window;
+    }
 
 
 

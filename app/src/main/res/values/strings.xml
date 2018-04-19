@@ -24,4 +24,9 @@
     <string name="notify">通知</string>
     <string name="chat">聊天</string>
     <string name="search">搜索</string>
+    <string name="back">返回</string>
+    <string name="see_comment_benduan">本段说</string>
+    <string name="publish_comment">评论</string>
+    <string name="share">分享</string>
+    <string name="report_this">举报本段</string>
 </resources>

@@ -9,4 +9,14 @@
     </style>
 
 
+    <style name="PopwindowTopAnim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/popwindow_top_show_anim</item>
+
+    </style>
+
+    <style name="PopwindowBottomAnim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/popwindow_bottom_show_anim</item>
+
+    </style>
+
 </resources>

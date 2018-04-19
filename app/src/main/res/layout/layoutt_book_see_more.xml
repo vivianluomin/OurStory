@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/main_bule"
+    >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin ="10dp"
+        >
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:id="@+id/tv_book_cover"
+            android:src="@color/gray"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_bookname"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:text="XXXXXXXX"
+            android:layout_toRightOf="@id/tv_book_cover"
+            android:layout_marginLeft="4dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_book_author"
+            android:textSize="12sp"
+            android:textColor="@color/gray"
+            android:text="发起人：xxxx"
+            android:layout_toRightOf="@id/tv_book_cover"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="4dp"
+            />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_share"
+        android:textSize="12sp"
+        android:textColor="@color/white"
+        android:text="@string/share"
+        android:layout_marginLeft="10dp"
+        android:drawableLeft="@mipmap/ic_share"
+        android:drawablePadding="10dp"
+        android:padding="10dp"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_report"
+        android:textSize="12sp"
+        android:textColor="@color/white"
+        android:text="@string/report_this"
+        android:layout_marginLeft="10dp"
+        android:drawableLeft="@mipmap/ic_report"
+        android:drawablePadding="10dp"
+        android:padding="10dp"
+        />
+
+</LinearLayout>

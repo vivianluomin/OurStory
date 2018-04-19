@@ -1,6 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/main_bule"
+    android:layout_gravity="bottom"
+    >
 
-</android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tv_book_catalog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="4dp"
+        android:drawableTop="@mipmap/ic_book_catalog"
+        android:gravity="center"
+        android:text="@string/catalog"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:id="@+id/tv_add_collection"
+        android:textColor="@color/white"
+        android:drawableTop="@mipmap/ic_add_collection"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="4dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/start_collection"
+        android:layout_marginTop="4dp"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:id="@+id/tv_publish_comment"
+        android:drawableTop="@mipmap/ic_publish_comment"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:layout_alignParentRight="true"
+        android:text="@string/publish_comment"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="16dp"
+        />
+
+</RelativeLayout>
