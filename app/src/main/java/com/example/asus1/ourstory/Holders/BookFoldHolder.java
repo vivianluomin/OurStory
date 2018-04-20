@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.asus1.ourstory.Activities.BookDetailActivity;
 import com.example.asus1.ourstory.R;
+import com.example.asus1.ourstory.Views.BookFlodView;
 
 /**
  * Created by asus1 on 2018/4/1.
@@ -51,12 +52,15 @@ public class BookFoldHolder extends RecyclerView.ViewHolder  {
 
     private boolean mAnimStart = false;
 
-    private int flag = 0;
+    private int flag = 1;
+    private BookFlodView mView;
 
     public BookFoldHolder(View itemView, Context context) {
         super(itemView);
         mContext = context;
+        mView = (BookFlodView) itemView;
         init(itemView);
+
     }
 
 
@@ -65,15 +69,21 @@ public class BookFoldHolder extends RecyclerView.ViewHolder  {
 
         mView_one = view.findViewById(R.id.book_fold_item_one);
 
-        mView_two = view.findViewById(R.id.view_two);
+        mView_two = LayoutInflater.from(mContext).inflate(R.layout.layout_view_two,mView,false);
         mView_two.setPivotY(0);
         mView_two.setPivotX(0);
-        mStart = (TextView)view. findViewById(R.id.tv_start);
+        mStart = (TextView) LayoutInflater.from(mContext).inflate(R.layout.layout_bookfold_start,mView,false);
+        mStart.setBackground(mContext.getDrawable(R.drawable.bg_corner_2));
+        mStart.setText("开头：XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
         mStart.setPivotY(0);
         mStart.setPivotX(0);
-        mUpdate = (TextView)view. findViewById(R.id.tv_update);
+        mUpdate = (TextView) LayoutInflater.from(mContext).inflate(R.layout.layout_bookfold_start,mView,false);
+        mUpdate.setBackground(mContext.getDrawable(R.drawable.bg_corner_3));
+        mUpdate.setText("更新：XxxxxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
         mUpdate.setPivotX(0);
         mUpdate.setPivotY(0);
+
+        mView.addViews(mView_two,mStart,mUpdate);
 
         mShowDetail = (TextView) view.findViewById(R.id.tv_book_detail);
 
@@ -105,7 +115,7 @@ public class BookFoldHolder extends RecyclerView.ViewHolder  {
 
         });
 
-        initfold();
+       // initfold();
 
 
     }

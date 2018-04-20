@@ -24,7 +24,7 @@
         android:layout_weight="1"
         android:text="@string/start_read"
         android:gravity="center"
-        android:textSize="12sp"
+        android:textSize="14sp"
         android:background="@color/main_bule"
         android:textColor="@color/white"
         />

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:id="@+id/book_fold_item_one"
-    android:background="@drawable/bg_corner_1"
+    android:background="@drawable/bg_corner"
     android:padding="10dp"
     >
 
