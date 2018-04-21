@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.example.asus1.ourstory.Activities.WriteActivity">
+
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="74dp"
+        android:paddingTop="24dp"
+        android:background="@color/white"
+        android:elevation="0dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="enterAlways"
+            >
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/iv_back"
+                android:src="@mipmap/ic_back_black"
+                android:scaleType="center"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/tv_word_count"
+                android:textSize="14sp"
+                android:textColor="@color/second_text_color"
+                android:text="10字"
+                android:gravity="center"
+                android:layout_toRightOf="@id/iv_back"
+                android:layout_marginLeft="10dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/tv_publish_story"
+                android:textSize="14dp"
+                android:textColor="@color/Text_color"
+                android:text="@string/publish_story"
+                android:gravity="center"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/iv_forward"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_forwaord_black"
+                android:layout_toLeftOf="@id/tv_publish_story"
+                android:layout_marginRight="16dp"
+                android:layout_centerVertical="true"
+                android:padding="5dp"
+                />
+
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/iv_backward"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_backward_black"
+                android:layout_toLeftOf="@id/iv_forward"
+                android:layout_marginRight="16dp"
+                android:layout_centerVertical="true"
+                android:padding="5dp"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_color"
+                android:layout_alignParentBottom="true"
+                />
+
+        </RelativeLayout>
+
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_book_title"
+                android:textSize="20sp"
+                android:textColor="@color/Text_color"
+                android:text="师兄今天不正常"
+                android:paddingLeft="10dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_book_duan"
+                android:textSize="12sp"
+                android:textColor="@color/second_text_color"
+                android:text="第二段"
+                android:drawableLeft="@mipmap/ic_book_duan"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="16dp"
+                android:drawablePadding="6dp"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_color"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                />
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/input_story"
+                android:id="@+id/et_write_story"
+                android:textSize="18sp"
+                android:textColor="@color/Text_color"
+                android:background="@null"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:lineSpacingMultiplier="1.2"
+                android:lineSpacingExtra="10dp"
+                />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+    </android.support.design.widget.CoordinatorLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider_color"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        >
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="30dp"
+            android:id="@+id/iv_dustbin"
+            android:src="@mipmap/ic_dustbin"
+            android:scaleType="center"
+            />
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="30dp"
+            android:id="@+id/iv_setting"
+            android:scaleType="center"
+            android:src="@mipmap/ic_setting_48"
+            />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="30dp"
+            android:scaleType="center"
+            android:id="@+id/iv_write"
+            android:src="@mipmap/ic_write_48"
+            />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="30dp"
+            android:scaleType="center"
+            android:id="@+id/iv_history"
+            android:src="@mipmap/ic_history_cricle"
+            />
+
+
+    </LinearLayout>
+
+</LinearLayout>
