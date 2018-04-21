@@ -1,5 +1,6 @@
 package com.example.asus1.ourstory.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabItem;
@@ -9,9 +10,11 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.example.asus1.ourstory.Activities.WriteActivity;
 import com.example.asus1.ourstory.Adapters.ViewPagerAdapter;
 import com.example.asus1.ourstory.R;
 
@@ -22,7 +25,7 @@ import java.util.List;
  * Created by asus1 on 2018/3/24.
  */
 
-public class BookShelfFragment extends Fragment implements TabLayout.OnTabSelectedListener {
+public class BookShelfFragment extends Fragment implements TabLayout.OnTabSelectedListener,View.OnClickListener {
 
 
     private TabLayout mTabLayout;
@@ -30,6 +33,7 @@ public class BookShelfFragment extends Fragment implements TabLayout.OnTabSelect
     private List<Fragment> mFragments = new ArrayList<>();
     private List<String> mTitles = new ArrayList<>();
     private ViewPagerAdapter mPagerAdapter;
+    private TextView mStartPublish;
 
     @Nullable
     @Override
@@ -41,6 +45,8 @@ public class BookShelfFragment extends Fragment implements TabLayout.OnTabSelect
         mTabLayout.addTab(mTabLayout.newTab().setText(R.string.mypublish));
         mTabLayout.addTab(mTabLayout.newTab().setText(R.string.myjoin));
         mViewPager = (ViewPager)(view.findViewById(R.id.viewpager));
+        mStartPublish = (TextView)(view.findViewById(R.id.tv_start_publish));
+        mStartPublish.setOnClickListener(this);
 
         mFragments.add(new CollectionFragment());
         mFragments.add(new PublishFragment());
@@ -79,5 +85,11 @@ public class BookShelfFragment extends Fragment implements TabLayout.OnTabSelect
 
     }
 
-
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.tv_start_publish:
+                startActivity(new Intent(getContext(), WriteActivity.class));
+        }
+    }
 }
