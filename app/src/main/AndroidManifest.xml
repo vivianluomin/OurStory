@@ -16,19 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.ReadStoryActivity" />
         <activity android:name=".Activities.BaseActivity" />
-        <activity android:name=".Activities.BaseActivity" />
-        <activity android:name=".Activities.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity android:name=".Activities.BookDetailActivity" />
         <activity android:name=".Activities.ReadActivity" />
-        <activity android:name=".Activities.WriteActivity"></activity>
+        <activity android:name=".Activities.WriteActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
+            ></activity>
     </application>
 
 </manifest>

@@ -32,4 +32,8 @@
     <string name="publish_story">发布</string>
     <string name="input_story">请输入正文</string>
     <string name="blank_spaces">\t\t\t\t</string>
+    <string name="yes">确定</string>
+    <string name="no">取消</string>
+    <string name="dustbin_title">要将该段移至回收站吗？</string>
+    <string name="dustbin_message">回收站内的段文可以在30天内恢复，超过30天将被永久删除</string>
 </resources>
