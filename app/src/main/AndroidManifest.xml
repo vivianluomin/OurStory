@@ -24,7 +24,10 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden">
             >
         </activity>
-        <activity android:name=".Activities.PublishStroyActivity"></activity>
+        <activity android:name=".Activities.PublishStroyActivity" />
+        <activity android:name=".Activities.BookBriefActivity" />
+        <activity android:name=".Activities.BookStartActivity" />
+        <activity android:name=".Activities.BookTypeActivity"></activity>
     </application>
 
 </manifest>

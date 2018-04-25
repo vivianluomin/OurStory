@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.example.asus1.ourstory.Activities.PublishStroyActivity;
 import com.example.asus1.ourstory.Activities.WriteActivity;
 import com.example.asus1.ourstory.Adapters.ViewPagerAdapter;
 import com.example.asus1.ourstory.R;
@@ -89,7 +90,7 @@ public class BookShelfFragment extends Fragment implements TabLayout.OnTabSelect
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_start_publish:
-                startActivity(new Intent(getContext(), WriteActivity.class));
+                startActivity(new Intent(getContext(), PublishStroyActivity.class));
         }
     }
 }
