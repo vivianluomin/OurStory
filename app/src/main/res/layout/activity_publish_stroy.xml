@@ -238,6 +238,48 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cilick_publish_story_item"
+        android:id="@+id/relat_book_write_type"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/book_write_type"
+            android:textSize="14sp"
+            android:textColor="@color/Text_color"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/second_text_color"
+            android:text="@string/please_select"
+            android:drawableEnd="@mipmap/ic_more"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:drawablePadding="4dp"
+            />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider_color"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        />
+
     <RelativeLayout
 
         android:layout_width="match_parent"
@@ -319,4 +361,5 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         />
+
 </LinearLayout>

@@ -27,7 +27,10 @@
         <activity android:name=".Activities.PublishStroyActivity" />
         <activity android:name=".Activities.BookBriefActivity" />
         <activity android:name=".Activities.BookStartActivity" />
-        <activity android:name=".Activities.BookTypeActivity"></activity>
+        <activity android:name=".Activities.BookTypeActivity" />
+        <activity android:name=".Activities.BookWriteTypeActivity" />
+        <activity android:name=".Activities.BookWriterActivity" />
+        <activity android:name=".Activities.BookPulickActivity"></activity>
     </application>
 
 </manifest>

@@ -16,6 +16,7 @@ public class PublishStroyActivity extends BaseActivity implements View.OnClickLi
     private RelativeLayout mBookType;
     private RelativeLayout mBookWriter;
     private RelativeLayout mBookPublic;
+    private RelativeLayout mBookWriteType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,8 @@ public class PublishStroyActivity extends BaseActivity implements View.OnClickLi
         mBookWriter.setOnClickListener(this);
         mBookPublic = (RelativeLayout)findViewById(R.id.relat_book_public);
         mBookPublic.setOnClickListener(this);
+        mBookWriteType = (RelativeLayout)findViewById(R.id.relat_book_write_type);
+        mBookWriteType.setOnClickListener(this);
     }
 
     @Override
@@ -48,11 +51,18 @@ public class PublishStroyActivity extends BaseActivity implements View.OnClickLi
                 startActivity(new Intent(PublishStroyActivity.this,BookStartActivity.class));
                 break;
             case R.id.relat_book_type:
+                startActivity(new Intent(PublishStroyActivity.this,BookTypeActivity.class));
+                break;
+            case R.id.relat_book_write_type:
+                startActivity(new Intent(PublishStroyActivity.this,BookWriteTypeActivity.class));
                 break;
             case R.id.relat_book_writer:
+
+                startActivity(new Intent(PublishStroyActivity.this,BookWriterActivity.class));
                 break;
 
             case R.id.relat_book_public:
+                startActivity(new Intent(PublishStroyActivity.this,BookPulickActivity.class));
                 break;
         }
     }
