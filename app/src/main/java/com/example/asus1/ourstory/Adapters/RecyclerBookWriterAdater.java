@@ -89,7 +89,7 @@ public class RecyclerBookWriterAdater extends RecyclerView.Adapter<BaseHolder> {
             View view = LayoutInflater.from(mContext)
                     .inflate(R.layout.layout_bookwriter_item,parent,false);
 
-            return new BookWriterHolder(view);
+            return new BookWriterHolder(view,mContext);
         }
 
     }

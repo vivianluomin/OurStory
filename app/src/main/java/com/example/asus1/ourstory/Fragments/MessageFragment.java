@@ -1,5 +1,6 @@
 package com.example.asus1.ourstory.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.asus1.ourstory.Activities.BookWriterActivity;
 import com.example.asus1.ourstory.Adapters.ViewPagerAdapter;
 import com.example.asus1.ourstory.R;
 
@@ -43,7 +45,7 @@ public class MessageFragment extends Fragment implements TabLayout.OnTabSelected
         mMessagePull.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(getContext(), BookWriterActivity.class));
             }
         });
 

@@ -1,5 +1,6 @@
 package com.example.asus1.ourstory.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.asus1.ourstory.Activities.SearchActivity;
 import com.example.asus1.ourstory.Adapters.RecyclerNotifyAdapter;
 import com.example.asus1.ourstory.R;
 import com.example.asus1.ourstory.Views.BookDetailDecoration;
@@ -23,6 +25,8 @@ public class NotifyFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerNotifyAdapter mAdapter;
 
+    private View mSearch;
+
 
     @Nullable
     @Override
@@ -33,6 +37,15 @@ public class NotifyFragment extends Fragment {
         mRecyclerView.addItemDecoration(new MessageDecoration(getContext()));
         mAdapter = new RecyclerNotifyAdapter(getContext());
         mRecyclerView.setAdapter(mAdapter);
+
+        mSearch = (View)(view.findViewById(R.id.layout_search));
+        mSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), SearchActivity.class));
+            }
+        });
+
         return view;
     }
 

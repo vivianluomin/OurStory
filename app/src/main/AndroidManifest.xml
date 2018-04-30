@@ -30,7 +30,10 @@
         <activity android:name=".Activities.BookTypeActivity" />
         <activity android:name=".Activities.BookWriteTypeActivity" />
         <activity android:name=".Activities.BookWriterActivity" />
-        <activity android:name=".Activities.BookPulickActivity"></activity>
+        <activity android:name=".Activities.BookPulickActivity" />
+        <activity android:name=".Activities.ContinueWriteActivity" />
+        <activity android:name=".Activities.SearchActivity" />
+        <activity android:name=".Activities.ChatActivity"></activity>
     </application>
 
 </manifest>

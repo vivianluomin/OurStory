@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.asus1.ourstory.Activities.ContinueWriteActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="74dp"
+        android:orientation="horizontal"
+        android:paddingTop="24dp"
+        android:background="@color/main_bule"
+        >
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/iv_back"
+            android:src="@mipmap/ic_back_white"
+            android:scaleType="centerInside"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:text="@string/continue_write"
+            />
+
+    </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="10dp"
+            >
+
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:scaleType="center"
+            android:id="@+id/iv_book_bg"
+            android:src="@color/bg_gray"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/iv_book_bg"
+            android:layout_marginLeft="16dp"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_bookname"
+                android:textSize="16dp"
+                android:textColor="@color/Text_color"
+                android:text="XXXXXX"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_book_author"
+                android:textSize="12sp"
+                android:textColor="@color/second_text_color"
+                android:layout_marginTop="4dp"
+                android:text="发起人：XXXXX"
+                />
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Base.Widget.AppCompat.RatingBar.Small"
+                android:id="@+id/rating_bar"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:rating="3"
+                android:stepSize="0.1"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:id="@+id/tv_type"
+                android:textSize="12sp"
+                android:textColor="@color/second_text_color"
+                android:text="类型：双续写"
+                />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_word_count"
+                    android:textSize="12sp"
+                    android:textColor="@color/second_text_color"
+                    android:text="12万字"
+                    />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="4dp"
+                    android:background="@color/white"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_join_number"
+                    android:textSize="12sp"
+                    android:textColor="@color/second_text_color"
+                    android:text="参与人数：13"
+                    android:layout_marginLeft="4dp"
+                    />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/gray_200"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:id="@+id/tv_book_update"
+        android:textColor="@color/Text_color"
+        android:text="更新到第10段"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dp"
+        android:padding="5dp"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="120dp"
+        android:background="@color/divider_color"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:id="@+id/tv_user_read"
+        android:textColor="@color/Text_color"
+        android:text="您读到了第10段"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dp"
+        android:padding="5dp"
+        android:layout_marginBottom="10dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/gray_200"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_continue_write"
+        android:textSize="12sp"
+        android:textColor="@color/Text_color"
+        android:text="@string/continue_write_start"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="16dp"
+        >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:src="@mipmap/ic_user"
+            android:id="@+id/iv_user_continuer_1"
+            />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:src="@mipmap/ic_user"
+            android:id="@+id/iv_user_continuer_2"
+            />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:src="@mipmap/ic_user"
+            android:id="@+id/iv_user_continuer_3"
+            />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:src="@mipmap/ic_join"
+            android:id="@+id/iv_user_continuer_4"
+            />
+
+    </LinearLayout>
+</LinearLayout>

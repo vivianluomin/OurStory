@@ -34,7 +34,7 @@ public class RecyclerBookItemAdapter extends RecyclerView.Adapter<BaseHolder> {
                 mContext.startActivity(new Intent(mContext, ReadActivity.class));
             }
         });
-        return new BookItemHolder(view);
+        return new BookItemHolder(view,mContext);
     }
 
     @Override

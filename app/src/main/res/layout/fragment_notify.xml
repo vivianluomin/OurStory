@@ -6,7 +6,9 @@
     android:orientation="vertical"
     >
 
-    <include layout="@layout/layout_search"/>
+    <include layout="@layout/layout_search"
+        android:id="@+id/layout_search"
+        />
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

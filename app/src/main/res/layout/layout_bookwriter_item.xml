@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="60dp"
     android:orientation="vertical"
+    android:background="@drawable/cilick_publish_story_item"
     >
 
     <LinearLayout
@@ -12,14 +13,22 @@
         android:orientation="horizontal"
         >
 
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/iv_select"
+            android:src="@drawable/radtio_button"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp"
+            />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/iv_user_icon"
         android:src="@mipmap/ic_user"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="6dp"
+        android:layout_marginLeft="10dp"
         />
 
     <TextView
