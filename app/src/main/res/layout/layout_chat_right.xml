@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="30dp"
+    >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/iv_user_icon"
+        android:src="@mipmap/ic_user"
+        android:layout_alignParentRight="true"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_toLeftOf="@id/iv_user_icon"
+        android:id="@+id/tv_content"
+        android:padding="10dp"
+        android:textSize="12sp"
+        android:textColor="@color/Text_color"
+        android:background="@drawable/ic_meassage_right"
+        android:text="好好学习！！！！！"
+        />
+
+
+</RelativeLayout>
