@@ -9,14 +9,10 @@
     </style>
 
 
-    <style name="PopwindowTopAnim" parent="android:Animation">
-        <item name="android:windowEnterAnimation">@anim/popwindow_top_show_anim</item>
-
-    </style>
-
-    <style name="PopwindowBottomAnim" parent="android:Animation">
-        <item name="android:windowEnterAnimation">@anim/popwindow_bottom_show_anim</item>
-
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/bg_start</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 
 </resources>
